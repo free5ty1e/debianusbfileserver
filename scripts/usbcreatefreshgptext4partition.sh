@@ -16,15 +16,15 @@ if [[ ! $(whoami) =~ "root" ]]; then
 	exit
 fi
 
-ls /dev/sd*
+ls -Gl /dev/sd*
 df -h
 
-if [[ $1 -eq 0 ]] ; then
+if [[ "$1" -eq 0 ]] ; then
 	usage_notes
     exit 0
 fi
 
-if [[ $2 -eq 0 ]] ; then
+if [[ "$2" -eq 0 ]] ; then
 	usage_notes
     exit 0
 fi
