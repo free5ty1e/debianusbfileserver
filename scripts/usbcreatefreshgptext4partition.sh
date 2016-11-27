@@ -51,7 +51,7 @@ sgdisk --largest-new=1 "$WHICHDRIVE"
 
 usbRootPartGuid=$(sudo sgdisk -i=1 "$WHICHDRIVE" | grep "Partition unique GUID:" | awk '{print $4}')
 echo "USB rootfs partition 1 GUID retrieved: $usbRootPartGuid"
-VOLUMEDEVICE="$WHICHDRIVE1"
+VOLUMEDEVICE="${WHICHDRIVE}1"
 echo "USB partition 1 device name retrieved: $VOLUMEDEVICE"
 
 # echo Here is where we need to set the /boot/cmdline.txt to point to root=PARTUUID=partitionguidhere along with rootdelay=5 at the end...
