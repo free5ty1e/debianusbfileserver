@@ -51,6 +51,8 @@ sgdisk --largest-new=1 "$WHICHDRIVE"
 
 usbRootPartGuid=$(sudo sgdisk -i=1 "$WHICHDRIVE" | grep "Partition unique GUID:" | awk '{print $4}')
 echo "USB rootfs partition 1 GUID retrieved: $usbRootPartGuid"
+VOLUMEDEVICE="$WHICHDRIVE1"
+echo "USB partition 1 device name retrieved: $VOLUMEDEVICE"
 
 # echo Here is where we need to set the /boot/cmdline.txt to point to root=PARTUUID=partitionguidhere along with rootdelay=5 at the end...
 # echo "Replacing GUID placeholder in new /boot/cmdline.txt with GUID $usbRootPartGuid..."
@@ -61,11 +63,11 @@ echo "USB rootfs partition 1 GUID retrieved: $usbRootPartGuid"
 # rm /home/pi/cmdline.txt
 
 echo "Ensuring USB drive is unmounted again..."
-umount "$WHICHDRIVE1"
-umount "$WHICHDRIVE1"
+umount "$VOLUMEDEVICE"
+umount "$VOLUMEDEVICE"
 
 echo "Now continuing with ext4 filesystem setup and formatting..."
-mke2fs -t ext4 "$WHICHDRIVE1"
+mke2fs -t ext4 "$VOLUMEDEVICE"
 #-L rootfs 
 
 # echo "Mounting new USB filesystem..."
@@ -92,13 +94,14 @@ mke2fs -t ext4 "$WHICHDRIVE1"
 # rm /mnt/etc/usbmount/mount.d/01_retropie_copyroms
 
 echo "Ensuring USB drive is unmounted again..."
-umount "$WHICHDRIVE1"
-umount "$WHICHDRIVE1"
+umount "$VOLUMEDEVICE"
+umount "$VOLUMEDEVICE"
 
 echo "Checking new filesystem...press enter to auto fix any issues that you are prompted for..."
-e2fsck -f "$WHICHDRIVE1"
+e2fsck -f "$VOLUMEDEVICE"
 
-e2label "$WHICHDRIVE1" "$VOLUMELABEL"
+echo "Labelling new filesystem volume $VOLUMEDEVICE with label $VOLUMELABEL..."
+e2label "$VOLUMEDEVICE" "$VOLUMELABEL"
 #echo Now going to auto expand your USB filesystem to fill the drive.  If you want to manually manage your partitions, or do not want to resize at this time, hit CTRL-C to cancel.
 #echo This is the last step before a reboot, so just reboot to finish if you skip this next step.
 #usbSda1ExpandFilesystem.sh
