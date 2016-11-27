@@ -9,9 +9,9 @@ if [[ ! $(whoami) =~ "root" ]]; then
 	exit
 fi
 
-echo "Attempting to fix journal of $1... (you should pass /dev/sdX# device to this script if you did not...)"
+echo "Checking for bad blocks and attempting to fix journal of $1... (you should pass /dev/sdX# device to this script if you did not...)"
 umount "$1"
 tune2fs -O ^has_journal "$1"
-e2fsck -f "$1"
+e2fsck -fc "$1"
 tune2fs -j "$1"
 mountusbbylabel.sh
