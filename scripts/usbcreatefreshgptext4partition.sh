@@ -19,12 +19,12 @@ fi
 ls -Gl /dev/sd*
 df -h
 
-if [[ "$1" -eq 0 ]] ; then
+if [ -z "$*" ] ; then
 	usage_notes
     exit 0
 fi
 
-if [[ "$2" -eq 0 ]] ; then
+if [ -z "$2" ] ; then
 	usage_notes
     exit 0
 fi
