@@ -55,7 +55,10 @@ VOLUMEDEVICE="${WHICHDRIVE}1"
 echo "USB partition 1 device name retrieved: $VOLUMEDEVICE"
 
 echo "Running partprobe on this device to ensure the kernel has the updated partition table in memory before continuing..."
-partprobe "$WHICHDRIVE"
+# partprobe "$WHICHDRIVE"
+
+
+
 # echo Here is where we need to set the /boot/cmdline.txt to point to root=PARTUUID=partitionguidhere along with rootdelay=5 at the end...
 # echo "Replacing GUID placeholder in new /boot/cmdline.txt with GUID $usbRootPartGuid..."
 # sed "s/\${partitionguid}/$usbRootPartGuid/" /home/pi/primestationone/reference/boot/cmdlineForGuidUsb.txt > /home/pi/cmdline.txt
@@ -69,7 +72,11 @@ umount "$VOLUMEDEVICE"
 umount "$VOLUMEDEVICE"
 
 echo "Now continuing with ext4 filesystem setup and formatting..."
-mke2fs -t ext4 "$VOLUMEDEVICE"
+# mke2fs -t ext4 "$VOLUMEDEVICE"
+
+
+
+
 #-L rootfs 
 
 # echo "Mounting new USB filesystem..."
@@ -100,15 +107,15 @@ umount "$VOLUMEDEVICE"
 umount "$VOLUMEDEVICE"
 
 echo "Checking new filesystem...press enter to auto fix any issues that you are prompted for..."
-e2fsck -f "$VOLUMEDEVICE"
+# e2fsck -f "$VOLUMEDEVICE"
 
 echo "Labelling new filesystem volume $VOLUMEDEVICE with label $VOLUMELABEL..."
-e2label "$VOLUMEDEVICE" "$VOLUMELABEL"
+# e2label "$VOLUMEDEVICE" "$VOLUMELABEL"
 #echo Now going to auto expand your USB filesystem to fill the drive.  If you want to manually manage your partitions, or do not want to resize at this time, hit CTRL-C to cancel.
 #echo This is the last step before a reboot, so just reboot to finish if you skip this next step.
 #usbSda1ExpandFilesystem.sh
 
 df -h
 
-# read -p "Must reboot for kernel to pick up new partition table!!  Press any key to continue rebooting... " -n1 -s
-# restart
+read -p "Must reboot for kernel to pick up new partition table!!  Press any key to continue rebooting... " -n1 -s
+restart
