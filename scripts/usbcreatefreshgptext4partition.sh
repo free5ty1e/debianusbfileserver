@@ -54,6 +54,8 @@ echo "USB rootfs partition 1 GUID retrieved: $usbRootPartGuid"
 VOLUMEDEVICE="${WHICHDRIVE}1"
 echo "USB partition 1 device name retrieved: $VOLUMEDEVICE"
 
+echo "Running partprobe on this device to ensure the kernel has the updated partition table in memory before continuing..."
+partprobe "$WHICHDRIVE"
 # echo Here is where we need to set the /boot/cmdline.txt to point to root=PARTUUID=partitionguidhere along with rootdelay=5 at the end...
 # echo "Replacing GUID placeholder in new /boot/cmdline.txt with GUID $usbRootPartGuid..."
 # sed "s/\${partitionguid}/$usbRootPartGuid/" /home/pi/primestationone/reference/boot/cmdlineForGuidUsb.txt > /home/pi/cmdline.txt
@@ -108,5 +110,5 @@ e2label "$VOLUMEDEVICE" "$VOLUMELABEL"
 
 df -h
 
-read -p "Must reboot for kernel to pick up new partition table!!  Press any key to continue rebooting... " -n1 -s
-restart
+# read -p "Must reboot for kernel to pick up new partition table!!  Press any key to continue rebooting... " -n1 -s
+# restart
