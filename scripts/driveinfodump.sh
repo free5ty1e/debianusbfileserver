@@ -35,6 +35,12 @@ sudo blkid /dev/sd*
 echo "
 ----------------------------------------------------------------------
 
+(as root), List all partition information (fdisk)..."
+sudo fdisk -l
+
+echo "
+----------------------------------------------------------------------
+
 Displaying the filesystem mounts and stats for them in human-readable format (df)..."
 df -h 
 
