@@ -16,8 +16,7 @@ if [[ ! $(whoami) =~ "root" ]]; then
 	exit
 fi
 
-ls -Gl /dev/sd*
-df -h
+driveinfodump.sh
 
 if [ -z "$*" ] ; then
 	usage_notes
