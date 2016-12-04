@@ -55,7 +55,7 @@ VOLUMEDEVICE="${WHICHDRIVE}1"
 echo "USB partition 1 device name retrieved: $VOLUMEDEVICE"
 
 echo "Running partprobe on this device to ensure the kernel has the updated partition table in memory before continuing..."
-partprobe "$WHICHDRIVE"
+# partprobe "$WHICHDRIVE"
 
 
 
@@ -73,13 +73,43 @@ umount "$VOLUMEDEVICE"
 
 echo "Now continuing with ext4 filesystem setup and formatting..."
 # mke2fs -t ext4 "$VOLUMEDEVICE"
-mkfs.ext4 -m 0 -L "$VOLUMELABEL" "$VOLUMEDEVICE"
+
+
+
+
+#-L rootfs 
+
+# echo "Mounting new USB filesystem..."
+# mount $WHICHDRIVE"1 /mnt
+
+# echo "Transferring root filesystem to USB drive..."
+# #sudo rsync -axi / /mnt | pv -les $(df -i / | perl -ane 'print $F[2] if $F[5] =/home/pi/ m:^/:') >/dev/null
+# rsync_with_progress "/" "/mnt"
+
+# echo "Now we need to get a unique identifier for the fstab drive information..."
+# echo "Note the Filesystem UUID in the below info for usage in the fstab..."
+# tune2fs -l $WHICHDRIVE"1
+# usbPart1FilesystemUuid=$(sudo tune2fs -l $WHICHDRIVE"1 | grep UUID | awk '{print $3}')
+# echo "USB Partition 1 Filesystem UUID retrieved: $usbPart1FilesystemUuid"
+
+# echo "Now modifying /etc/fstab to mount our UUID as the root mount point upon startup..."
+# sed "s/\${partitionuuid}/$usbPart1FilesystemUuid/" /home/pi/primestationone/reference/etc/fstabForUsbGuid > /home/pi/fstab
+# cp /mnt/etc/fstab /home/pi/fstab.bak
+# rm /mnt/etc/fstab
+# cp /home/pi/fstab /mnt/etc/fstab
+# rm /home/pi/fstab
+
+# echo "Removing USB copyroms service..."
+# rm /mnt/etc/usbmount/mount.d/01_retropie_copyroms
+
+echo "Ensuring USB drive is unmounted again..."
+umount "$VOLUMEDEVICE"
+umount "$VOLUMEDEVICE"
 
 echo "Checking new filesystem...press enter to auto fix any issues that you are prompted for..."
 # e2fsck -f "$VOLUMEDEVICE"
-fsck.ext4 -fpv "$VOLUMEDEVICE"
 
-#echo "Labelling new filesystem volume $VOLUMEDEVICE with label $VOLUMELABEL..."
+echo "Labelling new filesystem volume $VOLUMEDEVICE with label $VOLUMELABEL..."
 # e2label "$VOLUMEDEVICE" "$VOLUMELABEL"
 #echo Now going to auto expand your USB filesystem to fill the drive.  If you want to manually manage your partitions, or do not want to resize at this time, hit CTRL-C to cancel.
 #echo This is the last step before a reboot, so just reboot to finish if you skip this next step.
