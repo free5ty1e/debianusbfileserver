@@ -26,5 +26,4 @@ SYNCLOC2="$2"
 echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
 echo "DELETIONS WILL NOT BE PROPOGATED, THIS IS ON PURPOSE TO PREVENT DATA CORRUPTION FROM PROPOGATING"
-rsync -av --stats --whole-file --progress --log-file="${SYNCLOC1}/rsync.log ${SYNCLOC1}/ ${SYNCLOC2}/
-
+rsync -av --stats --whole-file --progress --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
