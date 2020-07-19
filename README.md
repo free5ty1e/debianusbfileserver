@@ -45,6 +45,10 @@ Save changes (`CTRL-X`).
 Then add your user to the Samba user list and set your password:
 `smbpasswd -a chris`
 
+Then restart the Samba service: 
+`sudo service smbd restart`
+
+
 
 ## Notes:
 (Note: If you are like me and starting with such a barebones Debian load that `sudo` isn't even installed, the following command sequence might be of interest to you -- and me, since *my* username is `chris` too!)
