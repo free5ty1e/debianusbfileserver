@@ -27,6 +27,24 @@ rm id_rsa.pub
 exit
 ```
 
+### Samba file sharing of all USB drives
+First edit the samba configuration file:
+`sudo nano /etc/samba/smb.conf`
+
+Then add the following share definition to share all USB drives:
+```
+[sharedusb]
+   comment = Mounted USB Drives
+   read only = no
+   path = /media 
+   guest ok = no
+```
+
+Save changes (`CTRL-X`).
+
+Then add your user to the Samba user list and set your password:
+`smbpasswd -a chris`
+
 
 ## Notes:
 (Note: If you are like me and starting with such a barebones Debian load that `sudo` isn't even installed, the following command sequence might be of interest to you -- and me, since *my* username is `chris` too!)
