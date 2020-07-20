@@ -12,8 +12,7 @@ sudo apt-get -y install git && pushd ~ && rm -rf debianusbfileserver && git clon
 ### Automount USB Drives By Volume Name At Startup
 If you'd like to have any USB drives automounted by volume name (only for drives that happen to be connected during startup), copy the `rc.local` file over to `/etc/rc.local` with the following command in your user folder:
 ```
-sudo cp debianusbfileserver/rc.local /etc/
-sudo chmod +x /etc/rc.local
+sudo cp debianusbfileserver/rc.local /etc/ && sudo chmod +x /etc/rc.local
 ```
 
 ### Passwordless SSH Logins
@@ -22,11 +21,7 @@ Then, the following sequence of commands from a terminal on the you want to set 
 ```
 scp ~/.ssh/id_rsa.pub chris@primeplexlenovo:/home/chris/
 ssh chris@primeplexlenovo
-mkdir ~/.ssh
-cat ~/id_rsa.pub >>~/.ssh/authorized_keys
-chmod 700 ~/.ssh/authorized_keys
-rm id_rsa.pub
-exit
+mkdir ~/.ssh && cat ~/id_rsa.pub >>~/.ssh/authorized_keys && chmod 700 ~/.ssh/authorized_keys && rm id_rsa.pub && exit
 ```
 
 ### Samba file sharing of all USB drives
