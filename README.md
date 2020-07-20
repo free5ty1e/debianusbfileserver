@@ -21,6 +21,7 @@ If you haven't already generated your SSH key, do it with the `ssh-keygen` comma
 Then, the following sequence of commands from a terminal on the you want to set up passwordless SSH from (assuming your username is also `chris`) : 
 ```
 scp ~/.ssh/id_rsa.pub chris@primeplexlenovo:/home/chris/
+ssh chris@primeplexlenovo
 mkdir ~/.ssh
 cat ~/id_rsa.pub >>~/.ssh/authorized_keys
 chmod 700 ~/.ssh/authorized_keys
