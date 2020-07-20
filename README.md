@@ -13,6 +13,7 @@ sudo apt-get -y install git && pushd ~ && rm -rf debianusbfileserver && git clon
 If you'd like to have any USB drives automounted by volume name (only for drives that happen to be connected during startup), copy the `rc.local` file over to `/etc/rc.local` with the following command in your user folder:
 ```
 sudo cp debianusbfileserver/rc.local /etc/
+sudo chmod +x /etc/rc.local
 ```
 
 ### Passwordless SSH Logins
