@@ -62,3 +62,7 @@ usermod -aG sudo chris
 exit
 ```
 (Then relaunch the terminal or relaunch the SSH session to continue)
+
+
+### Handy link to Plex Media Server installation commands for Debian
+https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/
