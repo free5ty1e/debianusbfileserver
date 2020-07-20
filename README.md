@@ -21,7 +21,7 @@ Then, the following sequence of commands from a terminal on the you want to set 
 ```
 scp ~/.ssh/id_rsa.pub chris@primeplexlenovo:/home/chris/
 ssh chris@primeplexlenovo
-mkdir ~/.ssh && cat ~/id_rsa.pub >>~/.ssh/authorized_keys && chmod 700 ~/.ssh/authorized_keys && rm id_rsa.pub && exit
+mkdir ~/.ssh ; cat ~/id_rsa.pub >>~/.ssh/authorized_keys && chmod 700 ~/.ssh/authorized_keys && rm id_rsa.pub && exit
 ```
 
 ### Samba file sharing of all USB drives
