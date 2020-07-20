@@ -43,7 +43,7 @@ Save changes (`CTRL-X`).
 
 Then add your user to the Samba user list and set your password: 
 ```
-smbpasswd -a chris
+sudo smbpasswd -a chris
 ```
 
 Then restart the Samba service:  
