@@ -25,7 +25,7 @@ mkdir ~/.ssh ; cat ~/id_rsa.pub >>~/.ssh/authorized_keys && chmod 700 ~/.ssh/aut
 ```
 
 ### Samba file sharing of all USB drives
-First edit the samba configuration file:
+First edit the samba configuration file: 
 `sudo nano /etc/samba/smb.conf`
 
 Then add the following share definition to share all USB drives:
@@ -39,10 +39,10 @@ Then add the following share definition to share all USB drives:
 
 Save changes (`CTRL-X`).
 
-Then add your user to the Samba user list and set your password:
+Then add your user to the Samba user list and set your password: 
 `smbpasswd -a chris`
 
-Then restart the Samba service: 
+Then restart the Samba service:  
 `sudo service smbd restart`
 
 
