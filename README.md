@@ -52,6 +52,52 @@ sudo service smbd restart
 ```
 
 
+### Mounting an FTP folder 
+As gone over here https://linuxconfig.org/mount-remote-ftp-directory-host-locally-into-linux-filesystem 
+
+One-time mount (this would, for example, mount an FTP folder in the above Samba share as another drive)
+```
+sudo mkdir -pv /media/Incoming
+curlftpfs -o allow_other USER:PASSWORD@192.168.100.1 /media/Incoming/
+```
+
+(you will first have to `sudo nano /etc/fuse.conf`, uncomment the `user_allow_other` line and save the file - or use another editor of your choice, ya elitists, I don't care)
+
+To automount each boot, need to create a `/home/root/.netrc` file with your creds in it and edit the `/etc/fstab` table carefully to avoid bootup problems:
+
+```
+sudo mkdir /home/root
+sudo nano /home/root/.netrc
+```
+
+then paste / edit the following entry into this file and save it:
+```
+machine 192.168.100.1
+login USER
+password PASSWORD
+```
+
+Then set the access mode and then output your ID to see your UID and GID for the next step:
+```
+sudo chmod 600 /home/root/.netrc
+id
+```
+
+Edit the `/etc/fstab` file: 
+```
+sudo nano /etc/fstab
+```
+
+Then add the following lines to the end of your /etc/fstab file ( change credentials for your ftp user ):
+```
+#FTP mount of router USB share
+curlftpfs#192.168.100.1 /mount/Incoming fuse allow_other,uid=1000,gid=1000,umask=0022 0 0
+```
+
+Now mount ftp with the following to test it out:
+```
+mount -a
+```
 
 ## Notes:
 (Note: If you are like me and starting with such a barebones Debian load that `sudo` isn't even installed, the following command sequence might be of interest to you -- and me, since *my* username is `chris` too!)
