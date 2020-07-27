@@ -63,40 +63,16 @@ curlftpfs -o allow_other USER:PASSWORD@192.168.100.1 /media/Incoming/
 
 (you will first have to `sudo nano /etc/fuse.conf`, uncomment the `user_allow_other` line and save the file - or use another editor of your choice, ya elitists, I don't care)
 
-To automount each boot, need to create a `/home/root/.netrc` file with your creds in it and edit the `/etc/fstab` table carefully to avoid bootup problems:
-
+To automount each boot, just add the following to your `/etc/rc.local` file before the `exit 0`:
 ```
-sudo mkdir /home/root
-sudo nano /home/root/.netrc
+sudo nano /etc/rc.local
 ```
 
-then paste / edit the following entry into this file and save it:
 ```
-machine 192.168.100.1
-login USER
-password PASSWORD
-```
-
-Then set the access mode and then output your ID to see your UID and GID for the next step:
-```
-sudo chmod 600 /home/root/.netrc
-id
-```
-
-Edit the `/etc/fstab` file: 
-```
-sudo nano /etc/fstab
-```
-
-Then add the following lines to the end of your /etc/fstab file ( change credentials for your ftp user ):
-```
-#FTP mount of router USB share
-curlftpfs#192.168.100.1 /mount/Incoming fuse allow_other,uid=1000,gid=1000,umask=0022 0 0
-```
-
-Now mount ftp with the following to test it out:
-```
-mount -a
+#Mount FTP share(s)
+mkdir -vp /media/Incoming
+chown chris:chris /media/Incoming
+curlftpfs -o allow_other USERNAME:PASSWORD@192.168.100.1 /media/Incoming/
 ```
 
 ## Notes:
