@@ -88,3 +88,8 @@ exit
 
 ### Handy link to Plex Media Server installation commands for Debian
 https://support.plex.tv/articles/235974187-enable-repository-updating-for-supported-linux-server-distributions/
+(see handy script `installPlexMediaServer.sh` that attempts to automate this)
+
+#### Additional handy link for those running on a Pi SD card
+https://forums.plex.tv/t/moving-pms-library/197342
+
