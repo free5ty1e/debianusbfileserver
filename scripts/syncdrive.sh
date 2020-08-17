@@ -2,7 +2,8 @@
 
 usage_notes() {
 	echo "USAGE: "
-    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak"
+    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun"
+    echo "(nodryrun is optional and in fact can be most any word)"
 }
 
 if [ -z "$*" ] ; then
@@ -22,13 +23,12 @@ SYNCLOC2="$2"
 #sudo bash -c "for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 2 > $i; done"
 #sudo bash -c "for foo in /sys/bus/usb/devices/*/power/level; do echo on > $foo; done"
 
-echo "Performing dry run first to allow review of changes before proceeding"
-
-rsync --archive --verbose --stats --whole-file --progress --times --dry-run --human-readable "${SYNCLOC1}/" "${SYNCLOC2}/"
-
-echo "Continue actually syncing if the above dry run results look correct, otherwise press CTRL-C to cancel and investigate!"
-
-read -p "Press enter to continue"
+if [ -z "$3" ] ; then
+	echo "Performing dry run first to allow review of changes before proceeding"
+	rsync --archive --verbose --stats --whole-file --progress --times --dry-run --human-readable "${SYNCLOC1}/" "${SYNCLOC2}/"
+	echo "Continue actually syncing if the above dry run results look correct, otherwise press CTRL-C to cancel and investigate!"
+	read -p "Press enter to continue"
+fi
 
 echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
