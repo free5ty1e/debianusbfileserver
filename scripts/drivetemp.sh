@@ -13,3 +13,4 @@ fi
 WHICHDRIVE="$1"
 
 sudo smartctl -A $WHICHDRIVE | grep -i Temperature
+sudo smartctl -d sat -A $WHICHDRIVE | grep -i Temperature
