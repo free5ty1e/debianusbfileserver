@@ -37,6 +37,7 @@ Then add the following share definition to share all USB drives:
    read only = no
    path = /media 
    guest ok = no
+   dfree command = /home/pi/dfree
 ```
 
 Save changes (`CTRL-X`).
@@ -44,6 +45,28 @@ Save changes (`CTRL-X`).
 Then add your user to the Samba user list and set your password: 
 ```
 sudo smbpasswd -a chris
+```
+
+If you'd like your free space to be reported correctly over Samba for each drive instead of the root filesystem, also add the following to the `[sharedusb]` section of the `smb.conf` file: (reference https://superuser.com/a/1467387/415715 and https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html )
+```
+[sharedusb]
+   dfree command = /usr/local/bin/dfree
+```
+
+...where `dfree` is a simple script, for example created with 
+```
+sudo nano /usr/local/bin/dfree
+```
+... containing: (the commented out 2nd line is the command that *should* work but if you are sharing a folder containing other USB drives then it will always still check the `sharedusb` folder for free space, which is the root filesystem, so we have to fake it instead with `echo` - in this case, we are just always reporting 128GB free, which should be plenty)
+```
+#!/bin/sh
+#/bin/df $1 | /bin/tail -1 | /bin/awk '{print $(NF-4),$(NF-2)}'
+echo "128000000000 128000000000"
+```
+... and then
+```
+sudo chown root:root /home/pi/dfree
+sudo chmod 777 /home/pi/dfree
 ```
 
 Then restart the Samba service:  
