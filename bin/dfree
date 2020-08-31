@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#/bin/df $1 | /bin/tail -1 | /bin/awk '{print $(NF-4),$(NF-2)}'
+echo "128000000000 128000000000"

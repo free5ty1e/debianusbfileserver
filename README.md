@@ -37,7 +37,7 @@ Then add the following share definition to share all USB drives:
    read only = no
    path = /media 
    guest ok = no
-   dfree command = /home/pi/dfree
+   dfree command = /usr/local/bin/dfree
 ```
 
 Save changes (`CTRL-X`).
@@ -53,7 +53,15 @@ If you'd like your free space to be reported correctly over Samba for each drive
    dfree command = /usr/local/bin/dfree
 ```
 
-...where `dfree` is a simple script, for example created with 
+...where `dfree` is a simple script (example at `bin/dfree`, install with the following commands)
+```
+sudo cp -vf debianusbfileserver/bin/dfree /usr/local/bin/
+sudo chown root:root /usr/local/bin/dfree
+sudo chmod 777 /usr/local/bin/dfree
+sudo service smbd restart
+```
+
+...If you'd like to create this `dfree` script manually:
 ```
 sudo nano /usr/local/bin/dfree
 ```
@@ -65,8 +73,8 @@ echo "128000000000 128000000000"
 ```
 ... and then
 ```
-sudo chown root:root /home/pi/dfree
-sudo chmod 777 /home/pi/dfree
+sudo chown root:root /usr/local/bin/dfree
+sudo chmod 777 /usr/local/bin/dfree
 ```
 
 Then restart the Samba service:  
