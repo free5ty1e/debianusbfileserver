@@ -132,8 +132,3 @@ sudo apt-get -y install vsftpd
 sudo cp -fv reference/vsftpd.conf /etc/
 sudo nano /etc/vsftpd.conf
 ```
-
-You may also have to: 
-```
-sudo chown -Rv nobody:nogroup SHARELOCATION
-```
