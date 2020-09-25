@@ -124,3 +124,16 @@ https://support.plex.tv/articles/235974187-enable-repository-updating-for-suppor
 #### Additional handy link for those running on a Pi SD card
 https://forums.plex.tv/t/moving-pms-library/197342
 
+
+### Adding an anonymous FTP server to access a USB share
+Copy over the example config and then edit it to your liking (mainly the `anon_root` location)
+```
+sudo apt-get -y install vsftpd
+sudo cp -fv reference/vsftpd.conf /etc/
+sudo nano /etc/vsftpd.conf
+```
+
+You may also have to: 
+```
+sudo chown -Rv nobody:nogroup SHARELOCATION
+```
