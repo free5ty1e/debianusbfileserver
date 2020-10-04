@@ -6,6 +6,7 @@ echo "Customize a copy of this script to sync your own plex fileserver drive nam
 echo "Syncing Plex media drive and archived Plex database"
 rm -rf /media/Media8TbBeee/plexdata
 pushd /media/Media8TbAyye
+rm plexmediaserver_plexdata_bak.7z
 7z plexdata
 mv plexdata.7z plexmediaserver_plexdata_bak.7z
 popd
