@@ -10,4 +10,6 @@ rm -rf /media/Media8TbBeee/plexdata
 # 7z plexdata
 # mv plexdata.7z plexmediaserver_plexdata_bak.7z
 # popd
-syncdrive.sh /media/Media8TbAyye /media/Media8TbBeee nodryrun 'plexdata'
+# syncdrive.sh /media/Media8TbAyye /media/Media8TbBeee nodryrun 'plexdata'
+
+syncdrive.sh /media/Media8TbAyye /media/Media8TbBeee nodryrun
