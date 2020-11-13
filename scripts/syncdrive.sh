@@ -33,7 +33,7 @@ EOF
 
 #If parameter 3 passed, if "dryrun" then do the dry run
 if [[ $3 ]] ; then
-	if [ $3 = "${PARAMATER_DRY_RUN}" ]; then
+	if [ $3 == $PARAMATER_DRY_RUN ]; then
 		DRY_RUN=true
 		echo "dryrun param detected, DRY_RUN is ${DRY_RUN}"
 	else
@@ -71,5 +71,8 @@ echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
 echo "DELETIONS WILL NOT BE PROPOGATED, THIS IS ON PURPOSE TO PREVENT DATA CORRUPTION FROM PROPOGATING"
 rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --one-file-system --human-readable --exclude-from="${EXCLUDEFILE}" --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
+
+echo "Exclude file contents were:"
+cat "${EXCLUDEFILE}"
 
 rm -v "${EXCLUDEFILE}"
