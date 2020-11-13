@@ -1,5 +1,6 @@
 #!/bin/bash
 
+EXCLUDEFILE="${HOME}/rsyncexclude.file"
 PARAMATER_DRY_RUN = "dryrun"
 
 usage_notes() {
@@ -21,7 +22,6 @@ fi
 
 SYNCLOC1="$1"
 SYNCLOC2="$2"
-EXCLUDEFILE="~/rsyncexclude.file"
 
 echo "Constructing exclude file..."
 cat > "${EXCLUDEFILE}" << EOF
