@@ -44,7 +44,7 @@ if [[ $3 ]] ; then
 		echo "non-dryrun param detected, DRY_RUN is ${DRY_RUN}"
 	fi
 else
-	DRY_RUN=false
+	DRY_RUN=true
 	echo "no dryrun param detected, DRY_RUN is ${DRY_RUN}"
 fi 
 
