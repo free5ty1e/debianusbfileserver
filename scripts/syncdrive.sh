@@ -26,6 +26,7 @@ SYNCLOC1="$1"
 SYNCLOC2="$2"
 
 echo "Constructing exclude file..."
+rm -v "${EXCLUDEFILE}"
 cat > "${EXCLUDEFILE}" << EOF
 rsync.log
 rsync.log.old
