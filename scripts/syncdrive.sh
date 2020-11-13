@@ -2,8 +2,9 @@
 
 usage_notes() {
 	echo "USAGE: "
-    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun"
+    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun excluded.fileOrFolder"
     echo "(nodryrun is optional and in fact can be most any word)"
+    echo "(excluded.fileOrFolder is an optional file or folder to exclude)"
 }
 
 if [ -z "$*" ] ; then
@@ -18,6 +19,21 @@ fi
 
 SYNCLOC1="$1"
 SYNCLOC2="$2"
+EXCLUDEFILE="~/rsyncexclude.file"
+
+echo "Constructing exclude file..."
+cat > "${EXCLUDEFILE}" << EOF
+rsync.log
+rsync.log.old
+._*
+.DS_Store
+EOF
+
+#If exclude parameter passed, append to exclude file:
+if [[ "$4" ]] ; then
+	echo "Appending $4 to exclude file ${EXCLUDEFILE}"
+	echo "$4" >> "${EXCLUDEFILE}"
+fi
 
 #echo "Enforcing no-sleep USB policies..."
 #sudo bash -c "for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 2 > $i; done"
@@ -25,7 +41,7 @@ SYNCLOC2="$2"
 
 if [ -z "$3" ] ; then
 	echo "Performing dry run first to allow review of changes before proceeding"
-	rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --dry-run --one-file-system --human-readable --exclude='._*' --exclude='.DS_Store' "${SYNCLOC1}/" "${SYNCLOC2}/"
+	rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --dry-run --one-file-system --human-readable --exclude-from="${EXCLUDEFILE}" "${SYNCLOC1}/" "${SYNCLOC2}/"
 	echo "Continue actually syncing if the above dry run results look correct, otherwise press CTRL-C to cancel and investigate!"
 	read -p "Press enter to continue"
 fi
@@ -36,4 +52,6 @@ mv -vf "${SYNCLOC1}/rsync.log" "${SYNCLOC1}/rsync.log.old"
 echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
 echo "DELETIONS WILL NOT BE PROPOGATED, THIS IS ON PURPOSE TO PREVENT DATA CORRUPTION FROM PROPOGATING"
-rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --one-file-system --human-readable --exclude='._*' --exclude='.DS_Store' --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
+rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --one-file-system --human-readable --exclude-from="${EXCLUDEFILE}" --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
+
+rm -v "${EXCLUDEFILE}"
