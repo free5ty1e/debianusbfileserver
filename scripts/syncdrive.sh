@@ -1,9 +1,11 @@
 #!/bin/bash
 
+PARAMATER_DRY_RUN = "dryrun"
+
 usage_notes() {
 	echo "USAGE: "
     echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun excluded.fileOrFolder"
-    echo "(nodryrun is optional and in fact can be most any word)"
+    echo "(nodryrun is optional and in fact can be most any word.  It must be 'dryrun' if you want to pass parameter 4 to exclude something)"
     echo "(excluded.fileOrFolder is an optional file or folder to exclude)"
 }
 
@@ -29,8 +31,23 @@ rsync.log.old
 .DS_Store
 EOF
 
-#If exclude parameter passed, append to exclude file:
-if [[ "$4" ]] ; then
+#If parameter 3 passed, if "dryrun" then do the dry run
+if [[ $3 ]] ; then
+	if [ $3 = "${PARAMATER_DRY_RUN}" ]; then
+		DRY_RUN=true
+		echo "dryrun param detected, DRY_RUN is ${DRY_RUN}"
+	else
+		DRY_RUN=false
+		echo "non-dryrun param detected, DRY_RUN is ${DRY_RUN}"
+	fi
+else
+	DRY_RUN=false
+	echo "no dryrun param detected, DRY_RUN is ${DRY_RUN}"
+fi 
+
+
+#If exclude parameter 4 passed, append to exclude file:
+if [[ $4 ]] ; then
 	echo "Appending $4 to exclude file ${EXCLUDEFILE}"
 	echo "$4" >> "${EXCLUDEFILE}"
 fi
@@ -39,7 +56,8 @@ fi
 #sudo bash -c "for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 2 > $i; done"
 #sudo bash -c "for foo in /sys/bus/usb/devices/*/power/level; do echo on > $foo; done"
 
-if [ -z "$3" ] ; then
+
+if [ "$DRY_RUN" = true ] ; then
 	echo "Performing dry run first to allow review of changes before proceeding"
 	rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --dry-run --one-file-system --human-readable --exclude-from="${EXCLUDEFILE}" "${SYNCLOC1}/" "${SYNCLOC2}/"
 	echo "Continue actually syncing if the above dry run results look correct, otherwise press CTRL-C to cancel and investigate!"
