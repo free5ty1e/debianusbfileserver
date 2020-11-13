@@ -1,7 +1,9 @@
 #!/bin/bash
 
 EXCLUDEFILE="${HOME}/rsyncexclude.file"
-PARAMATER_DRY_RUN = "dryrun"
+echo "Exclude file is ${EXCLUDEFILE}"
+PARAMATER_DRY_RUN="dryrun"
+echo "PARAMATER_DRY_RUN is ${PARAMATER_DRY_RUN}"
 
 usage_notes() {
 	echo "USAGE: "
