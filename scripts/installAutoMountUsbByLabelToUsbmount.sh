@@ -7,6 +7,6 @@ echo "Enhancing usbmount to also symlink drives by label in /media/"
 
 pushd ~/debianusbfileserver
 sudo cp -vr etc/* /etc/
-sudo chmod +x /etc/usbmount/mount.d/*
-sudo chmod +x /etc/usbmount/umount.d/*
+# sudo chmod +x /etc/usbmount/mount.d/*
+# sudo chmod +x /etc/usbmount/umount.d/*
 popd
