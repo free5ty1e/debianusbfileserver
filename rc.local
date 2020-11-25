@@ -20,7 +20,13 @@
 # done
 
 #Wait 15 seconds to allow USB hard drives to spin up and connect
-sleep 15
-mountusbbylabel.sh
+# sleep 15
+# mountusbbylabel.sh
+
+#still need to wait for usb drives to spin up before allowing startup to complete
+sleep 45
+
+#Start plex server after drives startup delay to ensure it doesn't catch old links
+service plexmediaserver start
 
 exit 0
