@@ -10,3 +10,5 @@ sudo cp -vr etc/* /etc/
 # sudo chmod +x /etc/usbmount/mount.d/*
 # sudo chmod +x /etc/usbmount/umount.d/*
 popd
+
+sudo chown pi:pi /media/*
