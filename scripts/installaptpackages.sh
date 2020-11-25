@@ -14,4 +14,4 @@ sudo apt-get install -y git curl samba samba-client cifs-utils ftp curlftpfs dia
 # installGoAndAnsize.sh
 #libbluetooth3 bluez bluez-utils bluez-compat bluez-hcidump bluetooth wicd-curses
 
-# installAutoMountUsbByLabelToUsbmount.sh
+installAutoMountUsbByLabelToUsbmount.sh
