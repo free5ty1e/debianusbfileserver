@@ -18,7 +18,7 @@ echo "If automounting USB HDDs at startup via usbmount, should probably wait via
 echo "Autolinking all already-mounted USB drives by volume name / label..."
 for dev in $(ls -1 /dev/disk/by-label/* | grep -v EFI) ; do
 	label=$(basename $dev)
-	mountpoint=$(mount | grep $(readlink --canonicalize "$dev") | awk -v N=$3 '{print $3}')
+	mountpoint=$(mount | grep $(readlink --canonicalize "$dev") | awk -v N=$3 '{print $3; exit;}')
 	echo "Autolinking $dev at $mountpoint to /media/$label"
 	rm -v "/media/$label"
 	test -e "/media/$label" || ln -sf "$mountpoint" "/media/$label"
