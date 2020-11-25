@@ -19,8 +19,10 @@ test -z "$UM_DEVICE" && test -z "$UM_MOUNTPOINT" && exit 0
 # get volume label name
 label=`blkid -s LABEL -o value $UM_DEVICE | tr -cd '[[:alnum:]]._-'`
 
+echo "usbmount service linking device $UM_DEVICE at mountpoint $UM_MOUNTPOINT to /media/$label"
+
 # If the symlink does not yet exist, create it.
+rm -f "/media/$label"
 test -z $label || test -e "/media/$label" || ln -sf "$UM_MOUNTPOINT" "/media/$label"
 
 exit 0
-
