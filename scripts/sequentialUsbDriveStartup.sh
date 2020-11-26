@@ -18,6 +18,7 @@ sed -i -E 's/(ENABLED=).*/\11/' /etc/usbmount/usbmount.conf
 
 echo "Automounting all USB drives by volume name / label..."
 for dev in $(ls /dev/sd?) ; do
+	echo "Connecting $dev"
 	touch $dev
 	sleep 5
 done
