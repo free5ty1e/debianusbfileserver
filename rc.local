@@ -24,7 +24,10 @@
 # mountusbbylabel.sh
 
 #still need to wait for usb drives to spin up before allowing startup to complete
-sleep 45
+# sleep 45
+
+#cycle through each /dev/sd? usb drive device and tell each to rerun connect scripts in sequence with delays
+sequentialUsbDriveStartup.sh
 
 #Start plex server after drives startup delay to ensure it doesn't catch old links
 service plexmediaserver start
