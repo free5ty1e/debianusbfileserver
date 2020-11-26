@@ -21,7 +21,7 @@ Once the system (Raspbian Buster, when this was written 2020.11.25) has launched
 
 If you (like me!) are also using this USB fileserver as a Plex media server, and one of the USB drives contains your `plexdata` library, then you will want to also `sudo systemctl disable plexmediaserver.service` to disable the Plex server autostart and also add the following to the `rc.local`:  `service plexmediaserver start`
 
-See the example `rc.local` file to see what this might look like.
+See the example `reference/rc.local` file to see what this might look like.
 
 
 ### Passwordless SSH Logins
@@ -90,6 +90,8 @@ Then restart the Samba service:
 ```
 sudo service smbd restart
 ```
+
+If you would like to see what this might look like on a combined RetroPie / USB fileserver where all shares are accessible via guest login, see the `reference/smb.conf`
 
 
 ### Mounting an FTP folder 
