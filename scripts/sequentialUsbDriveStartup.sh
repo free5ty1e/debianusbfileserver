@@ -20,7 +20,7 @@ echo "Automounting all USB drives by volume name / label..."
 for dev in $(ls /dev/sd?) ; do
 	echo "Connecting $dev"
 	touch $dev
-	sleep 5
+	sleep 7
 done
 
 echo "Waiting a bit longer for mount tasks to complete..."
