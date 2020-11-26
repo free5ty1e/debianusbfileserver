@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+ls /media | while read name; do
+    if test "`readlink \"/var/run/usbmount/$name\" || :`" = "$UM_MOUNTPOINT"; then
+		rm -f "/media/$name"
+		break
+    fi
+done
+
+exit 0
