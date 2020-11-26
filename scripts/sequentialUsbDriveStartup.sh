@@ -23,5 +23,9 @@ for dev in $(ls /dev/sd?) ; do
 	sleep 5
 done
 
+echo "Waiting a bit longer for mount tasks to complete..."
+sleep 10
+
 echo "Disabling usbmount service"
 sed -i -E 's/(ENABLED=).*/\10/' /etc/usbmount/usbmount.conf
+
