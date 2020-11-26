@@ -10,10 +10,19 @@ sudo apt-get -y install git && pushd ~ && rm -rf debianusbfileserver && git clon
 
 
 ### Automount USB Drives By Volume Name At Startup
-If you'd like to have any USB drives automounted by volume name (only for drives that happen to be connected during startup), copy the `rc.local` file over to `/etc/rc.local` with the following command in your user folder:
-```
-sudo cp debianusbfileserver/rc.local /etc/ && sudo chmod +x /etc/rc.local
-```
+The installer will add auto symlinks by volume name in `/media/$VOLUME_NAME` when USB drives are connected, and the symlinks will be cleared upon disconnection.
+This is handled by the `/etc/usbmount/mount.d/02_create_label_symlink` and `/etc/usbmount/umount.d/01_remove_label_symlink` scripts.
+
+Some of you (like me!) may find that `usbmount` fails to reliably handle multiple simultaneous USB drive connections, such as when connecting a USB hub with external drives already attached to it; only the first 3 or maybe 4 drives mount properly and the rest fail to obtain a mount lock (failing with such errors as `cannot acquire lock /var/run/usbmount/.mount.lock`).
+
+After much experimentation, failure, and frustration, I have devised a reliable way to start up such a USB fileserver with many USB drives attached during startup.  The solution is to disable the `usbmount` feature (via `/etc/usbmount/usbmount.conf`'s `ENABLED=0` flag) normally, and at the appropriate time during the startup procedure we need to sequence initialization of each drive and then wait a couple seconds before initializing the next drive.  
+
+Once the system (Raspbian Buster, when this was written 2020.11.25) has launched the `/etc/rc.local` service, all of the drives should be available under `/dev/sd?` (type `ls /dev/sd?` to see them).  So at this point, we want to launch the `sequentialUsbDriveStartup.sh` script.  
+
+If you (like me!) are also using this USB fileserver as a Plex media server, and one of the USB drives contains your `plexdata` library, then you will want to also `sudo systemctl disable plexmediaserver.service` to disable the Plex server autostart and also add the following to the `rc.local`:  `service plexmediaserver start`
+
+See the example `rc.local` file to see what this might look like.
+
 
 ### Passwordless SSH Logins
 If you haven't already generated your SSH key, do it with the `ssh-keygen` command with all defaults.
