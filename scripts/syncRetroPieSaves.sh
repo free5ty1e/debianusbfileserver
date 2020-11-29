@@ -27,6 +27,7 @@ SYNCLOC2="$2"
 echo "Constructing include file..."
 rm -v "${INCLUDEFILE}"
 cat > "${INCLUDEFILE}" << EOF
++ */
 + *.srm
 + *.state*
 + *.dat
@@ -36,7 +37,7 @@ cat > "${INCLUDEFILE}" << EOF
 + *.cfg
 + *.fs
 + *.eep
-- /*
+- *
 EOF
 
 #If parameter 3 passed, if "dryrun" then do the dry run
