@@ -1,7 +1,7 @@
 #!/bin/bash
 
 INCLUDEFILE="${HOME}/rsyncinclude.file"
-echo "Exclude file is ${INCLUDEFILE}"
+echo "Include file is located at ${INCLUDEFILE}"
 PARAMETER_DRY_RUN="dryrun"
 echo "PARAMETER_DRY_RUN is ${PARAMETER_DRY_RUN}"
 
@@ -57,6 +57,8 @@ fi
 #sudo bash -c "for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 2 > $i; done"
 #sudo bash -c "for foo in /sys/bus/usb/devices/*/power/level; do echo on > $foo; done"
 
+echo "Include file contents:"
+cat "${INCLUDEFILE}"
 
 if [ "$DRY_RUN" = true ] ; then
 	echo "Performing dry run first to allow review of changes before proceeding"
@@ -72,8 +74,5 @@ echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
 echo "DELETIONS WILL NOT BE PROPOGATED, THIS IS ON PURPOSE TO PREVENT DATA CORRUPTION FROM PROPOGATING"
 rsync --archive --verbose --stats --whole-file --progress --executability --fuzzy --one-file-system --human-readable --exclude="*" --include-from="${INCLUDEFILE}" --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
-
-echo "Include file contents were:"
-cat "${INCLUDEFILE}"
 
 rm -v "${INCLUDEFILE}"
