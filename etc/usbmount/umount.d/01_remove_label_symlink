@@ -2,7 +2,7 @@
 set -e
 
 ls /media | while read name; do
-    if test "`readlink \"/var/run/usbmount/$name\" || :`" = "$UM_MOUNTPOINT"; then
+    if test "`readlink \"/media/$name\" || :`" = "$UM_MOUNTPOINT"; then
 		rm -f "/media/$name"
 		break
     fi
