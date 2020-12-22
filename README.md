@@ -94,6 +94,32 @@ sudo service smbd restart
 If you would like to see what this might look like on a combined RetroPie / USB fileserver where all shares are accessible via guest login, see the `reference/smb.conf`
 
 
+### Forcing `usb-storage` instead of buggy `UAS` (USB As SCSI) driver
+You may not need this, I operated without even knowing about this blissfully for months with no issues... but here are some reference links for what I am about to summarize and offer a solution for:
+https://www.raspberrypi.org/forums/viewtopic.php?t=237829
+https://www.raspberrypi.org/forums/viewtopic.php?f=28&t=245931
+https://www.raspberrypi.org/forums/viewtopic.php?t=246128
+
+One day, I needed a 5GB `ISO` file from my fileserver, so I connected to the Samba share from my laptop and started copying it over for local operations.  It was copying over at decent speeds indicitave of a USB3 connection, all was well.  ... until a couple minutes in, when the copy failed with an `I/O Error` mentioned.  I attempted to start the copy once more and noticed that the share was empty.  As a matter of fact, ALL my drives linked in the share were empty now.  
+
+I remote in via SSH to take a closer look; the `/dev/sd?` entries are all gone.  The entire set of USB devices usually found on `lsusb` were gone, except for the internal Root USB 2.0 and 3.0 hubs.  
+
+Rebooting the system, all the drives come back up normally and I can start the copy again.  This time, it fails at a different point.  It wasn't a specific spot of data corruption.  I tried copying the file from its mirror drive; same result, different spot in the copy.  I tried all sorts of other tests to further isolate (I suspected Samba, I suspected two simultaneously failing drives, I suspected a failing USB3 hub, I copied files from other USB drives just fine locally on the Pi and via Samba)
+
+It was just 2 of my 6 drives; I could reproduce the failure by copying large files from one of these two drives to the other or vice versa.  Locally or over Samba.  They just happened to be the same make and model drive that I have as a set of data and its mirror.  For some reason, these two drives were acting as if they were failing both at once!
+
+Then, I noticed something when I tried looking at both the `lsusb` command *and* the `lsusb --tree` command.  Whoa, why are two of my drives using a different driver than the others?  (I *STILL* have not answered this question, by the way - because they didn't always act like this....)
+![](reference/pi4usb3fileserver2drivesUsingBuggyUasDriver.png?raw=true)
+
+After reading the links above, I tried modifying my `/boot/cmdline.txt` by adding the following parameter to it (using IDs from my `lsusb` command as I matched them up to all my USB3 drives)
+`usb-storage.quirks=0bc2:3322:u,1058:25fb:u,0bc2:a0a1:u,0bc2:50a2:u`
+
+This activates the system's USB Storage "quirks", which apparently disables the buggy `UAS` driver and forces all the indicated USB drives to utilize the far more stable `usb-storage` driver instead.  Behold the results, all 6 of my drives forced into using the stable driver:
+![](reference/pi4usb3fileserverAllDrivesUsingQuirksToForceUsbStorageDriver.png?raw=true)
+
+You can see the included ![reference/cmdline.txt](reference/cmdline.txt?raw=true) for reference if needed.
+
+
 ### Mounting an FTP folder 
 As gone over here https://linuxconfig.org/mount-remote-ftp-directory-host-locally-into-linux-filesystem 
 
