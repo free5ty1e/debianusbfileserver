@@ -117,7 +117,7 @@ After reading the links above, I tried modifying my `/boot/cmdline.txt` by addin
 This activates the system's USB Storage "quirks", which apparently disables the buggy `UAS` driver and forces all the indicated USB drives to utilize the far more stable `usb-storage` driver instead.  Behold the results, all 6 of my drives forced into using the stable driver:
 ![](reference/pi4usb3fileserverAllDrivesUsingQuirksToForceUsbStorageDriver.png?raw=true)
 
-You can see the included ![reference/cmdline.txt](reference/cmdline.txt?raw=true) for reference if needed.
+You can see the included https://github.com/free5ty1e/debianusbfileserver/blob/master/reference/cmdline.txt for reference if needed.  (located at `reference/cmdline.txt`)
 
 
 ### Mounting an FTP folder 
