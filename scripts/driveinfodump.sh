@@ -44,8 +44,25 @@ echo "
 Displaying the filesystem mounts and stats for them in human-readable format (df)..."
 df -h 
 
+
 echo "
 ----------------------------------------------------------------------
+
+Displaying the lsusb devices..."
+lsusb
+
+
+echo "
+----------------------------------------------------------------------
+
+Displaying the lsusb device tree..."
+lsusb --tree
+
+
+echo "
+----------------------------------------------------------------------
+
+
 
 
 ----------------------------------------------------------------------
