@@ -32,6 +32,7 @@ rsync.log
 rsync.log.old
 ._*
 .DS_Store
+lost+found
 EOF
 
 #If parameter 3 passed, if "dryrun" then do the dry run
