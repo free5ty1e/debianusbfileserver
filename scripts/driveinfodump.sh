@@ -17,8 +17,15 @@ lsusb
 echo "
 ----------------------------------------------------------------------
 
-(as root), Locate and print all block device attributes, even storage devices that werent able to be assigned a device id (blkid)..."
-sudo blkid -c /dev/null
+Displaying blkid list..."
+blkid
+
+echo "
+----------------------------------------------------------------------
+
+Displaying the lsusb device tree..."
+lsusb --tree
+
 
 echo "
 ----------------------------------------------------------------------
@@ -48,15 +55,8 @@ df -h
 echo "
 ----------------------------------------------------------------------
 
-Displaying the lsusb devices..."
-lsusb
-
-
-echo "
-----------------------------------------------------------------------
-
-Displaying the lsusb device tree..."
-lsusb --tree
+(as root), Locate and print all block device attributes, even storage devices that werent able to be assigned a device id (blkid)..."
+sudo blkid -c /dev/null
 
 
 echo "
