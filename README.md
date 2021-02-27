@@ -187,3 +187,5 @@ DEVICE
 ```
 
 Then, to have this service trigger send an email when the power goes out / comes back on: (COMING SOON)
+https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d
+
