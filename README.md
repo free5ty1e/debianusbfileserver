@@ -187,5 +187,54 @@ DEVICE
 ```
 
 Then, to have this service trigger send an email when the power goes out / comes back on: (COMING SOON)
-https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d
+`msmtp` https://www.raspberrypi.org/forums/viewtopic.php?t=244147#p1496767
+```sudo apt-get install msmtp msmtp-mta
+
+sudo nano /etc/msmtprc
+```
+
+/etc/msmtprc should contain the following:
+```
+# Generics
+defaults
+auth           on
+tls            on
+# following is different from ssmtp:
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+# user specific log location, otherwise use /var/log/msmtp.log, however, 
+# this will create an access violation if you are user pi, and have not changes the access rights
+logfile        ~/.msmtp.log
+
+# Gmail specifics
+account        gmail
+host           smtp.gmail.com
+port           587
+
+from          root@raspi-buster
+user           your-gmail-accountname@gmail.com
+password       your-gmail-account-password
+
+# Default
+account default : gmail
+```
+
+Test send email: 
+```
+echo 'your message' | msmtp destination-email-address@gmail.com
+```
+
+To also get a subject line and more control over emails, we need `mailutils`:
+
+```
+sudo apt-get install mailutils
+```
+
+Then the following works again:
+```
+echo 'message' | mail -s "raspi-buster" destination-email-address@gmail.com
+echo 'message' | sendmail destination-email-address@gmail.com
+```
+
+
+Postfix hasn't yet worked for me but here's a guide: https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d
 
