@@ -169,3 +169,21 @@ sudo apt-get -y install vsftpd
 sudo cp -fv reference/vsftpd.conf /etc/
 sudo nano /etc/vsftpd.conf
 ```
+
+
+### Managing a CyberPower UPS 
+
+For Raspberry Pi, you can use apcupsd. The needed configuration for my device in /etc/apcupsd/apcupsd.conf for my CyberPower UPSses (625VA) are:
+
+```
+#UPSCABLE smart
+UPSCABLE usb
+
+#UPSTYPE apcsmart
+UPSTYPE usb
+
+#DEVICE /dev/ttyS0
+DEVICE
+```
+
+Then, to have this service trigger send an email when the power goes out / comes back on: (COMING SOON)
