@@ -280,10 +280,10 @@ The main features I want to keep from GPhotos are:
   2b. Transcode (and shrink if above a threshold) each video file aggressively with H.265 and 2-pass to really shrink video files (scan will recognize videos already encoded with H.265 and skip them so processed files can stay in place)
   
 Links:
-https://syncthing.net/ 
-https://linuxconfig.org/batch-image-resize-using-linux-command-line
-https://guides.wp-bullet.com/batch-resize-images-using-linux-command-line-and-imagemagick/
-https://guides.wp-bullet.com/batch-compress-jpeg-images-lossless-linux-command-line/
-https://guides.wp-bullet.com/batch-optimize-jpg-lossy-linux-command-line-with-jpeg-recompress/
-https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
+1. https://syncthing.net/ 
+2. https://linuxconfig.org/batch-image-resize-using-linux-command-line
+3. https://guides.wp-bullet.com/batch-resize-images-using-linux-command-line-and-imagemagick/
+4. https://guides.wp-bullet.com/batch-compress-jpeg-images-lossless-linux-command-line/
+5. https://guides.wp-bullet.com/batch-optimize-jpg-lossy-linux-command-line-with-jpeg-recompress/
+6. https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
 
