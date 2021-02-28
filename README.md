@@ -240,6 +240,27 @@ I'd also like to be able to push a quick special notification to my de-googled /
 (create If Webhook Then Notification, then go here https://ifttt.com/maker_webhooks and click "Documentation" to see your API key and to construct your `curl` command)
 
 
-Postfix hasn't yet worked for me but here's a guide: https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d
+To automatically run these commands upon a UPS event https://tjth.co/apcupsd-to-send-email-on-power-failure/
+```
+nano /etc/apcupsd/apccontrol
+```
 
+Page down until you see this section:
+```
+#
+# powerout, onbattery, offbattery, mainsback events occur
+# in that order.
+#
+ powerout)
+ ;;
+```
+
+And simply insert your commands between the delimiters for the event you'd like to hook into, such as:
+
+```
+onbattery)
+ echo "Power failure on UPS ${2}. Running on batteries." | ${WALL}
+ apcaccess | mail -s "WARNING - UPS running on batteries" youremail@yourdomain.me.uk
+ ;;
+```
 
