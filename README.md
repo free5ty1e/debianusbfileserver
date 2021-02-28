@@ -264,3 +264,5 @@ onbattery)
  ;;
 ```
 
+An example `apccontrol` file as I use it (with an external centralized script containing all my keys and emails and phone numbers that get notified) is included in the `reference` folder.
+
