@@ -79,11 +79,11 @@ case "$1" in
     ;;
     onbattery)
 	echo "Power failure on UPS ${2}. Running on batteries." | ${WALL}
-	notifyupslisteners.sh "UPS ${2} on battery!"
+	notifyupslisteners.sh "PowOff UPS ${2} on battery!"
     ;;
     offbattery)
 	echo "Power has returned on UPS ${2}..." | ${WALL}
-        notifyupslisteners.sh "UPS ${2} power is back, charging..."
+        notifyupslisteners.sh "PowOn UPS ${2} power is back, charging"
     ;;
     mainsback)
 	if [ -f /etc/apcupsd/powerfail ] ; then
@@ -92,11 +92,11 @@ case "$1" in
     ;;
     failing)
 	echo "Battery power exhausted on UPS ${2}. Doing shutdown." | ${WALL}
-        notifyupslisteners.sh "UPS ${2} power exhausted, shutdown!!"
+        notifyupslisteners.sh "Pow0 ${2} power exhausted, shutdown!!"
     ;;
     timeout)
 	echo "Battery time limit exceeded on UPS ${2}. Doing shutdown." | ${WALL}
-        notifyupslisteners.sh "UPS ${2} time limit exceeded, shutdown!!"
+        notifyupslisteners.sh "PowTime ${2} time limit exceeded, shutdown!!"
     ;;
     loadlimit)
 	echo "Remaining battery charge below limit on UPS ${2}. Doing shutdown." | ${WALL}
@@ -117,11 +117,11 @@ case "$1" in
     ;;
     emergency)
 	echo "Emergency Shutdown. Possible battery failure on UPS ${2}." | ${WALL}
-        notifyupslisteners.sh "UPS ${2} Emergency Shutdown!"
+        notifyupslisteners.sh "PowEmerg UPS ${2} Emergency Shutdown!"
     ;;
     changeme)
 	echo "Emergency! Batteries have failed on UPS ${2}. Change them NOW" | ${WALL}
-        notifyupslisteners.sh "UPS ${2} Battery failure, change now!"
+        notifyupslisteners.sh "PowBattFail UPS ${2} Battery failure, change now!"
     ;;
     remotedown)
 	echo "Remote Shutdown. Beginning Shutdown Sequence." | ${WALL}
