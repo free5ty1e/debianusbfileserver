@@ -186,7 +186,7 @@ UPSTYPE usb
 DEVICE
 ```
 
-Then, to have this service trigger send an email when the power goes out / comes back on: (COMING SOON)
+Then, to have this service trigger send an email when the power goes out / comes back on: 
 `msmtp` https://www.raspberrypi.org/forums/viewtopic.php?t=244147#p1496767
 ```
 sudo apt-get install msmtp msmtp-mta
