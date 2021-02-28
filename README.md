@@ -264,5 +264,8 @@ onbattery)
  ;;
 ```
 
-An example `apccontrol` file as I use it (with an external centralized script containing all my keys and emails and phone numbers that get notified) is included in the `reference` folder.
-
+An example `apccontrol` file as I use it (with an external centralized script containing all my keys and emails and phone numbers that get notified) is included in the `reference` folder.  If you choose to simply copy this file over and modify it, please be sure to 
+```
+sudo chmod +x /etc/apcupsd/apccontrol
+sudo chown root:root /etc/apcupsd/apccontrol
+```
