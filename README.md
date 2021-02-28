@@ -269,3 +269,21 @@ An example `apccontrol` file as I use it (with an external centralized script co
 sudo chmod +x /etc/apcupsd/apccontrol
 sudo chown root:root /etc/apcupsd/apccontrol
 ```
+
+### SyncThing and Managing Your Own Local Google Photos-esque Sync Service
+The point of this service is to completely replace Google Photos functionality with something I am in complete control over.
+The main features I want to keep from GPhotos are:
+
+1. Can sync videos and images from my Android phone whenever I'm on my WiFi / same network as my SyncThing fileserver (automatic? perhaps. I'll be happy with manual - so that I know when I can "clear" my photos to make space on the phone and not worry about having to indicate in the photo list somehow)
+2. Once photos have been sync'd to the fileserver and are on a hard drive, a periodic cron job will go through the sync folder and perform the following tasks:
+  2a. Recompress / optimize and shrink (in the best order to achieve optimum results) each image file for archival (scan will recognize already processed photos and skip them so processed files can stay in place - probably by dimensions and / or file size)
+  2b. Transcode (and shrink if above a threshold) each video file aggressively with H.265 and 2-pass to really shrink video files (scan will recognize videos already encoded with H.265 and skip them so processed files can stay in place)
+  
+Links:
+https://syncthing.net/ 
+https://linuxconfig.org/batch-image-resize-using-linux-command-line
+https://guides.wp-bullet.com/batch-resize-images-using-linux-command-line-and-imagemagick/
+https://guides.wp-bullet.com/batch-compress-jpeg-images-lossless-linux-command-line/
+https://guides.wp-bullet.com/batch-optimize-jpg-lossy-linux-command-line-with-jpeg-recompress/
+https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
+
