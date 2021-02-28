@@ -236,6 +236,10 @@ echo 'message' | mail -s "raspi-buster" destination-email-address@gmail.com
 echo 'message' | sendmail destination-email-address@gmail.com
 ```
 
+I'd also like to be able to push a quick special notification to my de-googled / microG Android phone, which IFTTT can be used for as shown here https://betterprogramming.pub/how-to-send-push-notifications-to-your-phone-from-any-script-6b70e34748f6
+(create If Webhook Then Notification, then go here https://ifttt.com/maker_webhooks and click "Documentation" to see your API key and to construct your `curl` command)
+
 
 Postfix hasn't yet worked for me but here's a guide: https://medium.com/codingtown/send-mail-using-postfix-server-bbb08331d39d
+
 
