@@ -289,3 +289,8 @@ Links:
 5. https://guides.wp-bullet.com/batch-optimize-jpg-lossy-linux-command-line-with-jpeg-recompress/
 6. https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
 
+If you access the SyncThing folders at all from a Mac / OSX, you will get all sorts of "locally changed files" if you don't ignore the following pattern for each sync folder: 
+```
+(?d).DS_Store
+(?d)._*
+```
