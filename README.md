@@ -278,6 +278,8 @@ The main features I want to keep from GPhotos are:
 2. Once photos have been sync'd to the fileserver and are on a hard drive, a periodic cron job will go through the sync folder and perform the following tasks:
 3. Recompress / optimize and shrink (in the best order to achieve optimum results) each image file for archival (scan will recognize already processed photos and skip them so processed files can stay in place - probably by dimensions and / or file size)
 4. Transcode (and shrink if above a threshold) each video file aggressively with H.265 and 2-pass to really shrink video files (scan will recognize videos already encoded with H.265 and skip them so processed files can stay in place)
+5. SyncThing should be set up to sync only in one direction, from the phone to the fileserver, and deletes should be ignored completely.  Changes on the fileserver to the images should also not trigger a resync from the phone, allowing me to safely delete from the phone whenever I confirm the sync is up to date
+6. Ensure that the image and video processing... uh, process... doesn't affect the original file creation date, so that photos and videos will still show up in the proper order on their correct dates when they were taken -- not when they were compressed
   
 Links:
 1. https://syncthing.net/ 
