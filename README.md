@@ -287,7 +287,8 @@ Links:
 3. https://guides.wp-bullet.com/batch-resize-images-using-linux-command-line-and-imagemagick/
 4. https://guides.wp-bullet.com/batch-compress-jpeg-images-lossless-linux-command-line/
 5. https://guides.wp-bullet.com/batch-optimize-jpg-lossy-linux-command-line-with-jpeg-recompress/
-6. https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
+6. https://openbase.com/js/mozjpeg
+7. https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
 
 If you access the SyncThing folders at all from a Mac / OSX, you will get all sorts of "locally changed files" if you don't ignore the following pattern for each sync folder: 
 ```
