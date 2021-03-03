@@ -281,6 +281,28 @@ The main features I want to keep from GPhotos are:
 5. SyncThing should be set up to sync only in one direction, from the phone to the fileserver, and deletes should be ignored completely.  Changes on the fileserver to the images should also not trigger a resync from the phone, allowing me to safely delete from the phone whenever I confirm the sync is up to date
 6. Ensure that the image and video processing... uh, process... doesn't affect the original file creation date, so that photos and videos will still show up in the proper order on their correct dates when they were taken -- not when they were compressed
   
+  
+Building `mozjpeg` on a Raspberry Pi 4 is not documented directly anywhere I could find, but I think I got it working thusly:
+```
+sudo apt-get install build-essential autoconf pkg-config nasm libtool
+git clone https://github.com/mozilla/mozjpeg.git
+cd mozjpeg
+cmake -G"Unix Makefiles"
+make
+sudo make install
+cd ..
+```
+
+Then we can build the `jpeg-archive` toolset, (also not directly documented for install on a Raspberry Pi 4) which depends on `mozjpeg` above, thusly:
+```
+git clone https://github.com/danielgtaylor/jpeg-archive.git
+sudo ln -s /opt/mozjpeg/lib32/ /opt/mozjpeg/lib
+cd jpeg-archive
+make
+sudo make install
+```
+  
+  
 Links:
 1. https://syncthing.net/ 
 2. https://linuxconfig.org/batch-image-resize-using-linux-command-line
