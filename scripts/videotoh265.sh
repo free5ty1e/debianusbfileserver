@@ -8,4 +8,7 @@ echo "If needed, sudo apt-get install cpulimit ffmpeg"
 #ffmpeg -i "$1" -vcodec libx265 -crf 28 -preset veryslow -acodec libmp3lame -vf 'scale=1280:1280:force_original_aspect_ratio=decrease' "$2"
 
 #1-pass, 720p, veryslow, audio default
-ffmpeg -i "$1" -vcodec libx265 -crf 28 -preset veryslow -vf 'scale=1280:1280:force_original_aspect_ratio=decrease' "$2"
+#ffmpeg -i "$1" -vcodec libx265 -crf 28 -preset veryslow -vf 'scale=1280:1280:force_original_aspect_ratio=decrease' "$2"
+
+#1-pass, 1080p, veryslow, mp3 audio defaults
+ffmpeg -i "$1" -vcodec libx265 -crf 28 -preset veryslow -acodec libmp3lame -vf 'scale=1920:1920:force_original_aspect_ratio=decrease' "$2"
