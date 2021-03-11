@@ -1,5 +1,6 @@
 #!/bin/bash
 
+MAX_RATE_2PASS=""
 DEFAULT_LARGE_SIDE_MAX_PIXELS="1280"
 if [ -z "$3" ] ; then
     LARGE_SIDE_MAX_PIXELS="$DEFAULT_LARGE_SIDE_MAX_PIXELS"
@@ -34,6 +35,6 @@ if [ -z "$5" ] ; then
     ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -c:a aac -b:a 128k -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" "$2"
 else
     echo "Fifth parameter provided (is $5), using 2-pass encoding"
-    ffmpeg -y -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=1 -an -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" -f null /dev/null && \
-    ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=2 -c:a aac -b:a 128k "$2"
+    ffmpeg -y -i "$1" -vcodec libx265 -vbv-maxrate= -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=1:vbv-maxrate=1000:vbv-bufsize=2000 -an -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" -f null /dev/null && \
+    ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=2:vbv-maxrate=1000:vbv-bufsize=2000 -c:a aac -b:a 128k -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" "$2"
 fi
