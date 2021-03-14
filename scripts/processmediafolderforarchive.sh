@@ -64,13 +64,14 @@ for file in "$1"/*; do
 done
 
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
+ORIGINAL_FOLDER="$(pwd)"
 pushd "$1"
 find . -mindepth 1 -maxdepth 2 -type d | while read folder; do
     pushd "$folder"
     FOLDER_BASENAME="${PWD##*/}"
     echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
     find . -type f | while read file; do
-        processMediaFile "$file" "$2/$FOLDER_BASENAME"
+        processMediaFile "$file" "$ORIGINAL_FOLDER/$2/$FOLDER_BASENAME"
     done
     popd
 done;
