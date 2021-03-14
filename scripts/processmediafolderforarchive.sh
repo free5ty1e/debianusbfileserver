@@ -1,5 +1,13 @@
 #!/bin/bash
 
+
+
+#TODO: If we are in a subfolder tree, we want to reproduce that subfolder tree within the target year folder  (such as Reddit, Instagram, Facebook, etc)
+
+
+
+
+
 if [ -z "$1" ] ; then
     echo "First parameter (source media folder) not present, unable to continue."
     echo "Please provide source media folder as parameter 1 and target folder as parameter 2 and try again"
@@ -26,9 +34,12 @@ for file in "$1"/**/*; do
         'JPG'|'JPEG'|'PNG')
             imageprocessforarchive.sh "$file" "$2"
         ;;
-        'MP4'|'MKV'|'MOV'|'WEBP')
+        'MP4'|'MKV'|'MOV'|'WEBP'|'AVI')
             videoprocessforarchive.sh "$file" "$2"
         ;;
+        'GIF')
+            echo "GIF detected, may be animated, not processing just copying over to $2"
+            mv "$file" "$2"
         *)
             echo "Unknown file type with ext $extcaps, skipping!"
         ;;
