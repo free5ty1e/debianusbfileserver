@@ -13,13 +13,21 @@ case $(file -b "$1") in
   'JPEG '*)
     echo "JPEG file $1 detected, proceeding with processing (optimize then shrink for best file size)..."
     imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
-    imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TARGET_FOLDER/$(basename $1)"
-    rm "$TEMP_OPTIMIZED_FILENAME"
-    #rm "$1"
+    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TARGET_FOLDER/$(basename $1)" ; then 
+		if test -f "$TARGET_FOLDER/$(basename $1)"; then
+		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
+		    #rm "$1"
+		    rm "$TEMP_OPTIMIZED_FILENAME"
+		fi
+	fi
     ;;
   *)
     echo "$1 is not a JPEG file, skipping the processing and going straight to shrinking..."
-    # mv "$1" "$2"
-    imageshrinktohd.sh "$1" "$TARGET_FOLDER/$(basename $1)"
+    if imageshrinktohd.sh "$1" "$TARGET_FOLDER/$(basename $1)" ; then 
+		if test -f "$TARGET_FOLDER/$(basename $1)"; then
+		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
+		    #rm "$1"
+		fi
+	fi
     ;;
 esac
