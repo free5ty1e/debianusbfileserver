@@ -65,11 +65,11 @@ done
 
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
 pushd "$1"
-find . -maxdepth 1 -type d | while read folder; do
+find . -mindepth 1 -maxdepth 2 -type d | while read folder; do
     pushd "$folder"
     FOLDER_BASENAME="${PWD##*/}"
     echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
-    find . -mindepth 1 -type f | while read file; do
+    find . -type f | while read file; do
         processMediaFile "$file" "$2/$FOLDER_BASENAME"
     done
     popd
