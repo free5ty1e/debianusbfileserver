@@ -24,10 +24,10 @@ for file in "$1"/**/*; do
 
     case $extcaps in
         'JPG'|'JPEG'|'PNG')
-            imageprocessforarchive.sh "$1" "$2"
+            imageprocessforarchive.sh "$file" "$2"
         ;;
         'MP4'|'MKV'|'MOV'|'WEBP')
-            videoprocessforarchive.sh "$1" "$2"
+            videoprocessforarchive.sh "$file" "$2"
         ;;
         *)
             echo "Unknown file type with ext $extcaps, skipping!"
