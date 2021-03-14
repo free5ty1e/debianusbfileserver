@@ -36,6 +36,7 @@ function processMediaFile {
         'GIF')
             echo "GIF detected, may be animated, not processing just copying over to $DESTINATION_FOLDER"
             mv "$file" "$DESTINATION_FOLDER"
+        ;;
         *)
             echo "Unknown file type with ext $extcaps, skipping!"
         ;;
