@@ -64,10 +64,12 @@ for file in "$1"/*; do
 done
 
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
-find "$1" -type f | while read folder; do
-    echo "Processing subfolder $folder"
-    shopt -s globstar
-    for file in "$folder"/**/*; do
-        processMediaFile "$file" "$2/$folder"
-    done    
+find "$1" -type d -maxdepth 1 | while read folder; do
+    pushd "$folder"
+    FOLDER_BASENAME="${PWD##*/}"
+    echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
+    find "." -type f | while read file; do
+        processMediaFile "$file" "$2/$FOLDER_BASENAME"
+    done
+    popd
 done;
