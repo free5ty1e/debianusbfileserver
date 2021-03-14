@@ -59,12 +59,12 @@ fi
 echo "Processing media folder $1 for archival storage in location $2 under appropriate year folders, processing known media types"
 
 echo "First processing the files directly in $1"
-for file in "$1"; do
+for file in "$1"/*; do
     processMediaFile "$file" "$2"
 done
 
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
-find /path/to/top/level -type f | while read folder; do
+find "$1" -type f | while read folder; do
     echo "Processing subfolder $folder"
     for file in "$folder"/**/*; do
         processMediaFile "$file" "$2/$folder"
