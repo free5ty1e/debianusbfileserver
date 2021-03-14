@@ -303,7 +303,28 @@ cd jpeg-archive
 make
 sudo make install
 ```
-  
+
+Installing `ffmpeg` on a Raspberry Pi 4 is easy:
+```
+sudo apt-get install -y ffmpeg
+```
+
+Then you (or I!) can take advantage of my handy media processing scripts, meant to automatically take incoming photos and videos from a phone sync and:
+1) Optimize and shrink any JPEG imagery to HD sizes
+2) Shrink any non-JPEG, non-GIF imagery to HD sizes
+3) Transcode and shrink any video files to HD sizes with h.265 compression CRF 34 (as I've found to be quite suitable for Google Photos-esque levels of archival quality, actually quite a bit better and smaller)
+4) Detect timestamps in the filename of each original media file for more accurate dating - and if one is not found, fallback to extracting the year from the Creation Date. 
+5) Use the year detected in step 4 to organize all media into year subfolders for easier management, such as `targetFolder/2020` and `targetFolder/2021`
+6) Additionally, for subfolders in the `sourceFolder`, they will be treated each as their own archive folder, each main subfolder retained and flattened down to year folders inside each -- for example: `sourceFolder/Reddit/image1.jpg` would now be archived in `targetFolder/Reddit/2021/image1.jpg`
+7) The original media files will be deleted once they each have been successfully processed and the target archive file is confirmed to exist 
+8) Any undefined / unrecognized types of files will simply be *ignored*.
+
+This is the script to process a folder:
+
+```
+processmediafolderforarchive.sh sourceFolder targetFolder
+```
+
   
 Links:
 1. https://syncthing.net/ 
