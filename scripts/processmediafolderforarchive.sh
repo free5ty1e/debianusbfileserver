@@ -65,7 +65,7 @@ done
 
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
 pushd "$1"
-find "$1" -type d -maxdepth 1 | while read folder; do
+find "$1" -maxdepth 1 -type d | while read folder; do
     pushd "$folder"
     FOLDER_BASENAME="${PWD##*/}"
     echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
