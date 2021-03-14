@@ -20,7 +20,7 @@ else
     echo "Fourth parameter (VIDEO_COMPRESSION_RATE_FACTOR) provided: $VIDEO_COMPRESSION_RATE_FACTOR"
 fi
 
-echo "Processing video $1 for archival transcoding to h.265 and downscaling to 720p with mp3 audio to output file $2"
+echo "Processing video $1 for archival transcoding to h.265 and downscaling with mp3 audio to output file $2"
 echo "With a maximum large-side resolution of $LARGE_SIDE_MAX_PIXELS"
 echo "(You should provide the first parameter as the filename and second as the target for output,"
 echo "and the max large-side resolution as the third parameter or the default of 1280 will be used for a 720p output)"
