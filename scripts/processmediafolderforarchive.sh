@@ -1,11 +1,46 @@
 #!/bin/bash
 
+function processMediaFile {
 
+    #PARAMETER 1: (Required) FILE
+    if [[ -z "$1" ]]; then
+        echo "function parameter 1: FILE is required, passed blank"
+        return
+    else
+        FILE="$1"
+    fi
+    echo "FILE = ${FILE}"
 
-#TODO: If we are in a subfolder tree, we want to reproduce that subfolder tree within the target year folder  (such as Reddit, Instagram, Facebook, etc)
+    #PARAMETER 2: (Required) DESTINATION_FOLDER
+    if [[ -z "$2" ]]; then
+        echo "function parameter 2: DESTINATION_FOLDER is required, passed blank"
+        return
+    else
+        DESTINATION_FOLDER="$2"
+    fi
+    echo "DESTINATION_FOLDER = ${DESTINATION_FOLDER}"
 
+    filename=$(basename "$file")
+    fname="${filename%.*}"
+    ext="${filename##*.}"
+    extcaps=${ext^^}
+    echo "Processing $file with filename $filename, fname $fname, and ext $extcaps"
 
-
+    case $extcaps in
+        'JPG'|'JPEG'|'PNG')
+            imageprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
+        ;;
+        'MP4'|'MKV'|'MOV'|'WEBP'|'AVI')
+            videoprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
+        ;;
+        'GIF')
+            echo "GIF detected, may be animated, not processing just copying over to $DESTINATION_FOLDER"
+            mv "$file" "$DESTINATION_FOLDER"
+        *)
+            echo "Unknown file type with ext $extcaps, skipping!"
+        ;;
+    esac
+}
 
 
 if [ -z "$1" ] ; then
@@ -22,27 +57,15 @@ fi
 
 echo "Processing media folder $1 for archival storage in location $2 under appropriate year folders, processing known media types"
 
-shopt -s globstar
-for file in "$1"/**/*; do
-    filename=$(basename "$file")
-    fname="${filename%.*}"
-    ext="${filename##*.}"
-    extcaps=${ext^^}
-    echo "Processing $file with filename $filename, fname $fname, and ext $extcaps"
-
-    case $extcaps in
-        'JPG'|'JPEG'|'PNG')
-            imageprocessforarchive.sh "$file" "$2"
-        ;;
-        'MP4'|'MKV'|'MOV'|'WEBP'|'AVI')
-            videoprocessforarchive.sh "$file" "$2"
-        ;;
-        'GIF')
-            echo "GIF detected, may be animated, not processing just copying over to $2"
-            mv "$file" "$2"
-        *)
-            echo "Unknown file type with ext $extcaps, skipping!"
-        ;;
-    esac
-
+echo "First processing the files directly in $1"
+for file in "$1"; do
+    processMediaFile "$file" "$2"
 done
+
+echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
+find /path/to/top/level -type f | while read folder; do
+    echo "Processing subfolder $folder"
+    for file in "$folder"/**/*; do
+        processMediaFile "$file" "$2/$folder"
+    done    
+done;
