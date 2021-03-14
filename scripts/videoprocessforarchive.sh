@@ -8,4 +8,9 @@ TARGET_FOLDER="$2/$YEAR_FROM_FILENAME"
 echo "Year extracted from filename via script: $YEAR_FROM_FILENAME, creating location $TARGET_FOLDER if it does not already exist..."
 mkdir -pv "$TARGET_FOLDER"
 
-videotoh265.sh "$1" "$TARGET_FOLDER/$1" 1980 34
+if videotoh265.sh "$1" "$TARGET_FOLDER/$1" 1980 34 ; then 
+	if test -f "$TARGET_FOLDER/$1"; then
+	    echo "Transcode appears to have succeeded and target file $TARGET_FOLDER/$1 exists.  Removing source file."
+	    #rm "$1"
+	fi
+fi

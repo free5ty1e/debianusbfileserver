@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Processing image $1 for archival for storage in location $2 under an appropriate year folder - if jpeg, optimizing and shrinking.  If not jpeg, just moving."
+echo "Processing image $1 for archival storage in location $2 under an appropriate year folder - if jpeg, optimizing and shrinking.  If not jpeg, just moving."
 echo "(You should provide the first parameter as the image filename)"
 
 YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$1")
@@ -17,7 +17,8 @@ case $(file -b "$1") in
     #rm "$1"
     ;;
   *)
-    echo "$1 is not a JPEG file, skipping the processing..."
-    mv "$1" "$2"
+    echo "$1 is not a JPEG file, skipping the processing and going straight to shrinking..."
+    # mv "$1" "$2"
+    imageshrinktohd.sh "$1" "$TARGET_FOLDER/$1"
     ;;
 esac
