@@ -66,6 +66,7 @@ done
 echo "Next processing the files in each subfolder recursively flattening each down to just each subfolder with its own year folders"
 find "$1" -type f | while read folder; do
     echo "Processing subfolder $folder"
+    shopt -s globstar
     for file in "$folder"/**/*; do
         processMediaFile "$file" "$2/$folder"
     done    
