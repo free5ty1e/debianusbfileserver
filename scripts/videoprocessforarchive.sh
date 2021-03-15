@@ -11,6 +11,6 @@ mkdir -pv "$TARGET_FOLDER"
 if videotoh265.sh "$1" "$TARGET_FOLDER/$(basename $1)" 1920 34 ; then 
 	if test -f "$TARGET_FOLDER/$(basename $1)"; then
 	    echo "Transcode appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
-	    #rm "$1"
+	    rm "$1"
 	fi
 fi

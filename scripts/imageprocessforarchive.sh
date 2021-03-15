@@ -16,7 +16,7 @@ case $(file -b "$1") in
     if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TARGET_FOLDER/$(basename $1)" ; then 
 		if test -f "$TARGET_FOLDER/$(basename $1)"; then
 		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
-		    #rm "$1"
+		    rm "$1"
 		    rm "$TEMP_OPTIMIZED_FILENAME"
 		fi
 	fi
@@ -26,7 +26,7 @@ case $(file -b "$1") in
     if imageshrinktohd.sh "$1" "$TARGET_FOLDER/$(basename $1)" ; then 
 		if test -f "$TARGET_FOLDER/$(basename $1)"; then
 		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
-		    #rm "$1"
+		    rm "$1"
 		fi
 	fi
     ;;
