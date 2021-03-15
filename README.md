@@ -371,3 +371,43 @@ Reattach the screen in a later SSH session like so:
 ```
 screen -r
 ```
+
+##### Using Jellyfin for H.265 hardware decoding support on Raspberry Pi 4 (instead of Plex, which does not support this yet) :
+https://jellyfin.org/
+https://jellyfin.org/docs/general/administration/hardware-acceleration.html
+
+Add the Jellyfin service user to the video group to allow Jellyfin's FFMpeg process access to the encoder, and restart Jellyfin.
+
+```
+sudo usermod -aG video jellyfin
+sudo systemctl restart jellyfin
+```
+
+NOTE:
+If you are using a Raspberry Pi 4, you might need to run `sudo rpi-update` for kernel and firmware updates.
+
+Choose `OpenMAX OMX` as the Hardware acceleration on the Transcoding tab of the Server Dashboard.
+
+Change the amount of memory allocated to the GPU. The GPU can't handle accelerated decoding and encoding simultaneously.
+
+```
+sudo nano /boot/config.txt
+```
+
+For RPi4, add the line `gpu_mem=320` 
+
+For RPi3, add the line `gpu_mem=256`
+
+You can set any value, but `320` is recommended amount for 4K HEVC.
+
+Verify the split between CPU and GPU memory:
+
+```
+vcgencmd get_mem arm && vcgencmd get_mem gpu
+```
+
+Monitor the temperature and clock speed of the CPU:
+
+```
+vcgencmd measure_temp && vcgencmd measure_clock arm
+```
