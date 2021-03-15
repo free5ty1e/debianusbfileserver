@@ -398,7 +398,7 @@ For RPi4, add the line `gpu_mem=320`
 
 For RPi3, add the line `gpu_mem=256`
 
-You can set any value, but `320` is recommended amount for 4K HEVC.
+You can set any value, but `320` is recommended amount for 4K HEVC. (I still never got hevc decode to work)
 
 Verify the split between CPU and GPU memory:
 
@@ -411,3 +411,5 @@ Monitor the temperature and clock speed of the CPU:
 ```
 vcgencmd measure_temp && vcgencmd measure_clock arm
 ```
+
+More discussion around RPi 4b + Jellyfin / ffmpeg using h.265 hardware decoder is here https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=283301&start=50#p1789041
