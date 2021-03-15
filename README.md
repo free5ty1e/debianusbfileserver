@@ -342,3 +342,32 @@ If you access the SyncThing folders at all from a Mac / OSX, you will get all so
 (?d).DS_Store
 (?d)._*
 ```
+
+##### Using the `screen` utility to kick off and come back to long-running jobs over SSH
+Screen will ensure the batch command keeps on running even if your SSH session is terminated.
+
+```
+sudo apt-get install screen
+```
+
+Create a new screen session
+
+```
+screen
+```
+
+Perform your long-running command (for example, kick off processing of a large folder of media files as below)
+
+```
+processmediafolderforarchive.sh sourceFolder targetFolder
+```
+
+Detach the screen with `Ctrl+A` and pressing `D` (detach).
+
+You can use the `top` command and look for active processes once in a while.
+
+Reattach the screen in a later SSH session like so:
+
+```
+screen -r
+```
