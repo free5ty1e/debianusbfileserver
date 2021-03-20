@@ -1,0 +1,6 @@
+#!/bin/bash
+
+processmediafolderforarchive.sh SyncthingChrisAndroid/AndroidCamera Syncthing/ChrisMedia/AndroidCamera
+processmediafolderforarchive.sh SyncthingChrisAndroid/PicturesFromApps Syncthing/ChrisMedia/PicturesFromApps
+processmediafolderforarchive.sh Syncthing/CodiDox Syncthing/CodiMedia
+processmediafolderforarchive.sh Syncthing/GooglePixel4aPhotos Syncthing/GooglePixel4aPhotosProcessed
