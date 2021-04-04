@@ -320,6 +320,7 @@ Then you (or I!) can take advantage of my handy media processing scripts, meant 
 8) Any undefined / unrecognized types of files will simply be *ignored*.
 9) The output folder of the FFMPEG should be a temporary folder, preferably on a RAMdisk, and only once the transcode is complete should it write the full output file to the target folder.
 10) The temp / working folder of the image processing should be a RAMdisk as well.
+11) If the image processing ends up without an image at the target site, should default to just copying it over (Usually resulting from the "New size is larger then old size" error condition anyway) so that we don't miss archiving any media.
 
 This is the script to process a folder:
 
