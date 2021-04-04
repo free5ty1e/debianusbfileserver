@@ -328,7 +328,8 @@ This is the script to process a folder:
 processmediafolderforarchive.sh sourceFolder targetFolder
 ```
 
-See link 7 below for details on how to have Syncthing auto run this script after sync and BAM!  Google Photos service at home that YOU control!  
+See link 8 below for details on how to have Syncthing auto run this script after sync and BAM!  Google Photos service at home that YOU control!  
+Edit: OK, so Syncthing doesn't yet have this feature.  So we'll create a simple service instead; see links 9 - 12.
   
 Links:
 1. https://syncthing.net/ 
@@ -339,6 +340,10 @@ Links:
 6. https://openbase.com/js/mozjpeg
 7. https://geoffruddock.com/bulk-compress-videos-x265-with-ffmpeg/
 8. https://github.com/syncthing/syncthing/issues/5601 (Syncthing how to auto run script after sync)
+9. https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/
+10. https://www.linux.com/topic/desktop/systemd-services-monitoring-files-and-directories/
+11. https://gist.github.com/fcangialosi/45701b95f7436049a6390fecf3c9b8a1
+12. https://bartsimons.me/sync-folders-and-files-on-linux-with-rsync-and-inotify/
 
 If you access the SyncThing folders at all from a Mac / OSX, you will get all sorts of "locally changed files" if you don't ignore the following pattern for each sync folder: 
 ```
