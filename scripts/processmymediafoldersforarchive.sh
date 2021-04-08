@@ -1,6 +1,7 @@
 #!/bin/bash
 
-processmediafolderforarchive.sh SyncthingChrisAndroid/AndroidCamera Syncthing/ChrisMedia/AndroidCamera
-processmediafolderforarchive.sh SyncthingChrisAndroid/PicturesFromApps Syncthing/ChrisMedia/PicturesFromApps
-processmediafolderforarchive.sh Syncthing/CodiDox Syncthing/CodiMedia
-processmediafolderforarchive.sh Syncthing/GooglePixel4aPhotos Syncthing/GooglePixel4aPhotosProcessed
+BASEFOLDER="/media/MassiveSto8TbAyy"
+processmediafolderforarchive.sh "$BASEFOLDER/SyncthingChrisAndroid/AndroidCamera" "$BASEFOLDER/SyncthingProcessed/ChrisMedia/AndroidCamera"
+processmediafolderforarchive.sh "$BASEFOLDER/SyncthingChrisAndroid/PicturesFromApps" "$BASEFOLDER/SyncthingProcessed/ChrisMedia/PicturesFromApps"
+processmediafolderforarchive.sh "$BASEFOLDER/Syncthing/CodiDox" "$BASEFOLDER/SyncthingProcessed/CodiMedia"
+processmediafolderforarchive.sh "$BASEFOLDER/Syncthing/GooglePixel4aPhotos" "$BASEFOLDER/SyncthingProcessed/GooglePixel4aMedia"
