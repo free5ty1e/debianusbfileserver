@@ -3,7 +3,9 @@
 echo "Processing image $1 for archival storage in location $2 under an appropriate year folder - if jpeg, optimizing and shrinking.  If not jpeg, just moving."
 echo "(You should provide the first parameter as the image filename)"
 
+TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME="shrunk_$(basename $1)"
 TEMP_OPTIMIZED_FILENAME="optimized_temp.jpg"
+TEMP_OPTIMIZED_STAGE2_FILENAME="optimized_stage2_temp.jpg"
 YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$1")
 TARGET_FOLDER="$2/$YEAR_FROM_FILENAME"
 echo "Year extracted from filename via script: $YEAR_FROM_FILENAME, creating location $TARGET_FOLDER if it does not already exist..."
@@ -13,9 +15,10 @@ case $(file -b "$1") in
   'JPEG '*)
     echo "JPEG file $1 detected, proceeding with processing (optimize then shrink for best file size)..."
     imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
-    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TARGET_FOLDER/$(basename $1)" ; then 
+    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
+    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$(basename $1)"
 		if test -f "$TARGET_FOLDER/$(basename $1)"; then
-		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
+		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file and temp file."
 		    rm "$1"
 		    rm "$TEMP_OPTIMIZED_FILENAME"
 		fi
@@ -23,7 +26,8 @@ case $(file -b "$1") in
     ;;
   *)
     echo "$1 is not a JPEG file, skipping the processing and going straight to shrinking..."
-    if imageshrinktohd.sh "$1" "$TARGET_FOLDER/$(basename $1)" ; then 
+    if imageshrinktohd.sh "$1" "$TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME" ; then 
+    	mv "$TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME" "$TARGET_FOLDER/$(basename $1)"
 		if test -f "$TARGET_FOLDER/$(basename $1)"; then
 		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
 		    rm "$1"
