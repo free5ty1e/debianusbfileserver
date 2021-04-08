@@ -7,9 +7,9 @@ echo "PARAMATER_DRY_RUN is ${PARAMATER_DRY_RUN}"
 
 usage_notes() {
 	echo "USAGE: "
-    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun excluded.fileOrFolder"
+    echo "syncdrive.sh /media/VolumeOne /media/VolumeOneBak nodryrun excluded.fileOrFolder1 excluded.fileOrFolder2"
     echo "(nodryrun is optional and in fact can be most any word.  It must be 'dryrun' if you want to pass parameter 4 to exclude something)"
-    echo "(excluded.fileOrFolder is an optional file or folder to exclude)"
+    echo "(excluded.fileOrFolder 1 & 2 are optional files or folders to exclude)"
 }
 
 if [ -z "$*" ] ; then
@@ -54,6 +54,12 @@ fi
 if [[ $4 ]] ; then
 	echo "Appending $4 to exclude file ${EXCLUDEFILE}"
 	echo "$4" >> "${EXCLUDEFILE}"
+fi
+
+#If exclude parameter 5 passed, also append to exclude file:
+if [[ $5 ]] ; then
+	echo "Appending $5 to exclude file ${EXCLUDEFILE}"
+	echo "$5" >> "${EXCLUDEFILE}"
 fi
 
 #echo "Enforcing no-sleep USB policies..."
