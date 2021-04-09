@@ -71,7 +71,7 @@ find . -mindepth 1 -maxdepth 2 -type d | while read folder; do
     FOLDER_BASENAME="${PWD##*/}"
     echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
     find . -type f | while read file; do
-        processMediaFile "$file" "$ORIGINAL_FOLDER/$2/$FOLDER_BASENAME"
+        processMediaFile "$file" "$2/$FOLDER_BASENAME"
     done
     popd
 done;
