@@ -286,7 +286,13 @@ The main features I want to keep from GPhotos are:
 Install Syncthing following their website instructions: https://syncthing.net/downloads/#debian--ubuntu-packages, then here is a handy link with further instructions to install the Syncthing systemd service so it autostarts upon boot:
 https://docs.syncthing.net/users/autostart.html#linux 
 The Github location of the systemd files is here: https://github.com/syncthing/syncthing/tree/main/etc/linux-systemd
-
+...here, to download to the Pi and install the service, type:
+```
+wget https://raw.githubusercontent.com/syncthing/syncthing/main/etc/linux-systemd/system/syncthing%40.service
+sudo cp syncthing@.service /etc/systemd/system/
+sudo systemctl enable syncthing@pi.service
+sudo systemctl start syncthing@pi.service
+```
 
 Building `mozjpeg` on a Raspberry Pi 4 is not documented directly anywhere I could find, but I think I got it working thusly:
 ```
