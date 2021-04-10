@@ -14,7 +14,7 @@ fi
 # bash -c "for foo in /sys/bus/usb/devices/*/power/level; do echo on > $foo; done"
 
 echo "Enabling usbmount service"
-sed -i -E 's/(ENABLED=).*/\11/' /etc/usbmount/usbmount.conf
+enableusbmountservice.sh
 
 echo "Automounting all USB drives by volume name / label..."
 for dev in $(ls /dev/sd?) ; do
@@ -27,5 +27,4 @@ echo "Waiting a bit longer for mount tasks to complete..."
 sleep 10
 
 echo "Disabling usbmount service"
-sed -i -E 's/(ENABLED=).*/\10/' /etc/usbmount/usbmount.conf
-
+disableusbmountservice.sh
