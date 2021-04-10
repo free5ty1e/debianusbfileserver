@@ -12,6 +12,9 @@
 #
 # By default this script does nothing.
 
+#Clear out the existing USB symlinks:
+rm -v /media/*
+
 #cycle through each /dev/sd? usb drive device and tell each to rerun connect scripts in sequence with delays
 sequentialUsbDriveStartup.sh
 
