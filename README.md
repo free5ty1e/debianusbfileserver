@@ -283,7 +283,10 @@ The main features I want to keep from GPhotos are:
 7. OK, so when photos are dumped into the sync folder this may need to be somewhere temporary / incoming / not on a redundant part of a backup drive yet.  Then, the processing script notices new files in there (or checks every so often and notices), and shrinks / recompresses / transcodes the files to another folder named after the current year (2021) on a redundant part of a backup drive.  This way the incoming files won't be duplicated before they are processed.
 8. Then perhaps before I clear photos / videos on my phone, first I check the sync status to make sure they all sync'd to the incoming folder, then I check the "incoming" folder to make sure it's empty, then I safely can delete the photos on my phone - knowing they are now safely on a redundant drive (perhaps I should also initiate the redundant sync before considering them "safe")
   
-  
+Install Syncthing following their website instructions: https://syncthing.net/downloads/#debian--ubuntu-packages, then here is a handy link with further instructions to install the Syncthing systemd service so it autostarts upon boot:
+https://docs.syncthing.net/users/autostart.html#linux
+
+
 Building `mozjpeg` on a Raspberry Pi 4 is not documented directly anywhere I could find, but I think I got it working thusly:
 ```
 sudo apt-get install build-essential autoconf pkg-config nasm libtool
