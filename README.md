@@ -447,3 +447,10 @@ HEVC HWA Pi4 decoding guide here on Reddit: https://www.reddit.com/r/jellyfin/co
 
 Log2RAM (instead of SD) - and it's an APT package for ease:
 https://github.com/azlux/log2ram
+
+Uninstalled / disabled the swap file:
+```
+sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && update-rc.d dphys-swapfile remove && systemctl disable dphys-swapfile
+```
+
+
