@@ -338,6 +338,15 @@ This is the script to process a folder:
 processmediafolderforarchive.sh sourceFolder targetFolder
 ```
 
+...and, if you'd like to just have this GPhotos-esque service (I like to call mine "CPhotos") always running as a systemd service, then I've worked out an example of exactly how to do that.  My example uses my customized `processmymediafoldersforarchive.sh` script, which runs through a list of specific syncs and target archival folders for my fileserver, and can be found as `reference/cphotos.service`.
+If you'd like to install this service, customize the `cphotos.service` file and then:
+```
+sudo cp cphotos.service /etc/systemd/system/
+sudo systemctl enable cphotos.service
+sudo systemctl start cphotos.service
+```
+
+
 See link 8 below for details on how to have Syncthing auto run this script after sync and BAM!  Google Photos service at home that YOU control!  
 Edit: OK, so Syncthing doesn't yet have this feature.  So we'll create a simple service instead; see links 9 - 12.
   
