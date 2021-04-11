@@ -441,3 +441,9 @@ vcgencmd measure_temp && vcgencmd measure_clock arm
 
 More discussion around RPi 4b + Jellyfin / ffmpeg using h.265 hardware decoder is here https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=283301&start=50#p1789041
 HEVC HWA Pi4 decoding guide here on Reddit: https://www.reddit.com/r/jellyfin/comments/ei6ew6/rpi4_hardware_acceleration_guide/
+
+
+#### Other useful tricks / links:
+
+Log2RAM (instead of SD) - and it's an APT package for ease:
+https://github.com/azlux/log2ram
