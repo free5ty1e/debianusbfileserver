@@ -58,6 +58,18 @@ fi
 
 echo "Processing media folder $1 for archival storage in location $2 under appropriate year folders, processing known media types"
 
+if [ ! -d "$1" ] 
+then
+    echo "Directory $1 DOES NOT exist." 
+    exit 9999 # die with error code 9999
+fi
+
+if [ ! -d "$2" ] 
+then
+    echo "Directory $2 DOES NOT exist." 
+    exit 9999 # die with error code 9999
+fi
+
 echo "First processing the files directly in $1"
 for file in "$1"/*; do
     processMediaFile "$file" "$2"
