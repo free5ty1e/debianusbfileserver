@@ -294,6 +294,8 @@ sudo systemctl enable syncthing@pi.service
 sudo systemctl start syncthing@pi.service
 ```
 
+Now, if you're like me (or if you are me...!), you'll want to disable this syncthing service and manually start it up in `rc.local` after the USB drives are all sequenced and mounted and linked, or your syncthing service will complain about folder paths missing.  See the included `reference/rc.local` for how I do this.
+
 Building `mozjpeg` on a Raspberry Pi 4 is not documented directly anywhere I could find, but I think I got it working thusly:
 ```
 sudo apt-get install build-essential autoconf pkg-config nasm libtool
