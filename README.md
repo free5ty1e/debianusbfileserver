@@ -348,6 +348,8 @@ sudo systemctl enable cphotos.service
 sudo systemctl start cphotos.service
 ```
 
+....however, if you're like me (or are me!) - then you probably want to sequence this service's startup time to after the USB drives are all mounted and linked properly.  In this case, see the `reference/rc.local` instead of using the `enable` command above.
+
 
 See link 8 below for details on how to have Syncthing auto run this script after sync and BAM!  Google Photos service at home that YOU control!  
 Edit: OK, so Syncthing doesn't yet have this feature.  So we'll create a simple service instead; see links 9 - 12.
