@@ -22,4 +22,7 @@ sequentialUsbDriveStartup.sh
 #Start plex server after drives startup delay to ensure it doesn't catch old links
 service plexmediaserver start
 
+#Start syncthing service after drives startup to avoid issues as well
+systemctl start syncthing@pi.service
+
 exit 0
