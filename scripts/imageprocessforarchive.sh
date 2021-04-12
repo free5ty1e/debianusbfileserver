@@ -3,7 +3,8 @@
 echo "Processing image $1 for archival storage in location $2 under an appropriate year folder - if jpeg, optimizing and shrinking.  If not jpeg, just moving."
 echo "(You should provide the first parameter as the image filename)"
 
-TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME="shrunk_$(basename $1)"
+FILE_BASENAME=$(basename "$1")
+TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME="shrunk_$FILE_BASENAME"
 TEMP_OPTIMIZED_FILENAME="optimized_temp.jpg"
 TEMP_OPTIMIZED_STAGE2_FILENAME="optimized_stage2_temp.jpg"
 YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$1")
@@ -16,9 +17,9 @@ case $(file -b "$1") in
     echo "JPEG file $1 detected, proceeding with processing (optimize then shrink for best file size)..."
     imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
     if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
-    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$(basename $1)"
-		if test -f "$TARGET_FOLDER/$(basename $1)"; then
-		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file and temp file."
+    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
+		if test -f "$TARGET_FOLDER/$FILE_BASENAME"; then
+		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$FILE_BASENAME exists.  Removing source file and temp file."
 		    rm "$1"
 		    rm "$TEMP_OPTIMIZED_FILENAME"
 		fi
@@ -27,9 +28,9 @@ case $(file -b "$1") in
   *)
     echo "$1 is not a JPEG file, skipping the processing and going straight to shrinking..."
     if imageshrinktohd.sh "$1" "$TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME" ; then 
-    	mv "$TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME" "$TARGET_FOLDER/$(basename $1)"
-		if test -f "$TARGET_FOLDER/$(basename $1)"; then
-		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$(basename $1) exists.  Removing source file."
+    	mv "$TEMP_SHRUNK_IMAGE_OUTPUT_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
+		if test -f "$TARGET_FOLDER/$FILE_BASENAME"; then
+		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$FILE_BASENAME exists.  Removing source file."
 		    rm "$1"
 		fi
 	fi
