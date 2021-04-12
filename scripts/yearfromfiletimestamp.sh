@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gphotosregex='^Photos from $[0-9]\{4\}'
+gphotosregex='Photos from [0-9]{4}'
 screenshotregex='[_][0-9]{8}[-]'
 regex='[_][0-9]{8}[_]'
 if [[ $1 =~ $gphotosregex ]]; then
