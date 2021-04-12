@@ -314,6 +314,7 @@ sudo ln -s /opt/mozjpeg/lib32/ /opt/mozjpeg/lib
 cd jpeg-archive
 make
 sudo make install
+cd ..
 ```
 
 Installing `ffmpeg` on a Raspberry Pi 4 is easy:
