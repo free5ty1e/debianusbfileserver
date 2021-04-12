@@ -1,7 +1,15 @@
 #!/bin/bash
 
-regex='[0-9]{8}'
+gphotosregex='Photos from [0-9]\{4\}'
+screenshotregex='_[0-9]{8}-'
+regex='_[0-9]{8}_'
 if [[ $1 =~ $regex ]]; then
+    # echo "File $1 has a "Photos From XXXX" year stamp in the filename, extracting year from timestamp"
+    TIMESTAMP_YEAR=$(echo "$1" | grep -o -m1 'Photos from [0-9]\{4\}' | awk 'NR==1')
+elif [[ $1 =~ $screenshotregex ]]; then
+    # echo "File $1 has a timestamp in the filename, extracting year from timestamp"
+    TIMESTAMP_YEAR=$(echo "$1" | grep -o -m1 '[0-9]\{4\}' | awk 'NR==1')
+elif [[ $1 =~ $regex ]]; then
     # echo "File $1 has a timestamp in the filename, extracting year from timestamp"
     TIMESTAMP_YEAR=$(echo "$1" | grep -o -m1 '[0-9]\{4\}' | awk 'NR==1')
 else
