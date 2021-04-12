@@ -404,7 +404,7 @@ Reattach the screen in a later SSH session like so:
 screen -r
 ```
 
-##### Using Jellyfin for H.265 hardware decoding support on Raspberry Pi 4 (instead of Plex, which does not support this yet) :
+#### Using Jellyfin for H.265 hardware decoding support on Raspberry Pi 4 (instead of Plex, which does not support this yet) :
 https://jellyfin.org/
 https://jellyfin.org/docs/general/administration/hardware-acceleration.html
 
@@ -446,6 +446,36 @@ vcgencmd measure_temp && vcgencmd measure_clock arm
 
 More discussion around RPi 4b + Jellyfin / ffmpeg using h.265 hardware decoder is here https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=283301&start=50#p1789041
 HEVC HWA Pi4 decoding guide here on Reddit: https://www.reddit.com/r/jellyfin/comments/ei6ew6/rpi4_hardware_acceleration_guide/
+
+
+#### Mount remote Samba share on this system:
+https://tecadmin.net/mounting-samba-share-on-ubuntu/
+For the purposes of this example, I will be mounting a remote samba share named `smb://192.168.100.104/sharedusb` to local folder `/media/sharedusb`.
+
+```
+sudo apt -y install cifs-utils
+sudo mkdir /media/sharedusb
+```
+
+If you don't need credentials, the next step is simple:
+```
+sudo mount -t cifs -o rw,vers=3.0,username=guest,password="" //192.168.100.104/sharedusb /media/sharedusb
+```
+
+If you need credentials, the next step is a bit more involved:
+```
+pushd ~
+nano .smbcredentials
+
+#.smbcredentials: 
+username=smb_username
+password=smb_password
+
+popd 
+
+
+sudo mount -t cifs -o rw,vers=3.0,credentials=~/.smbcredentials //192.168.100.104/sharedusb /media/sharedusb 
+```
 
 
 #### Other useful tricks / links:
