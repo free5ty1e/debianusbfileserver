@@ -298,7 +298,7 @@ Now, if you're like me (or if you are me...!), you'll want to disable this synct
 
 Building `mozjpeg` on a Raspberry Pi 4 is not documented directly anywhere I could find, but I think I got it working thusly:
 ```
-sudo apt-get install build-essential autoconf pkg-config nasm libtool
+sudo apt-get -y install build-essential autoconf pkg-config nasm libtool
 git clone https://github.com/mozilla/mozjpeg.git
 cd mozjpeg
 cmake -G"Unix Makefiles"
