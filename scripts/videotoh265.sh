@@ -32,7 +32,7 @@ echo "If needed, sudo apt-get install ffmpeg"
 
 if [ -z "$5" ] ; then
     echo "Fifth parameter omitted, using default of 1-pass encoding"
-    ffmpeg -loglevel debug -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -c:a aac -b:a 128k -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" "$2"
+    ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -c:a aac -b:a 128k -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" "$2"
 else
     echo "Fifth parameter provided (is $5), using 2-pass encoding"
     ffmpeg -y -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=1:vbv-maxrate=1000:vbv-bufsize=2000 -an -vf "scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_original_aspect_ratio=decrease" -f null /dev/null && \
