@@ -11,7 +11,7 @@ echo "Year extracted from filename via script: $YEAR_FROM_FILENAME, creating loc
 mkdir -pv "$TARGET_FOLDER"
 
 if videotoh265.sh "$1" "$TEMP_OUTPUT_FILENAME" 1920 34 ; then 
-	mv "$TEMP_OUTPUT_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
+	mv "$TEMP_OUTPUT_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME.mp4"
 	if test -f "$TARGET_FOLDER/$FILE_BASENAME"; then
 	    echo "Transcode appears to have succeeded and target file $TARGET_FOLDER/$FILE_BASENAME exists.  Removing source file and temp file."
 	    rm "$1"
