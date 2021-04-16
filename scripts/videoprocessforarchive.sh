@@ -21,6 +21,7 @@ case $extcaps in
 esac
 
 TEMP_OUTPUT_FILENAME="h265_$FILE_BASENAME"
+rm "$TEMP_OUTPUT_FILENAME"
 YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$1")
 TARGET_FOLDER="$2/$YEAR_FROM_FILENAME"
 echo "Year extracted from filename via script: $YEAR_FROM_FILENAME, creating location $TARGET_FOLDER if it does not already exist..."
