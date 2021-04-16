@@ -33,8 +33,8 @@ function processMediaFile {
         'MP4'|'MKV'|'MOV'|'WEBP'|'AVI')
             videoprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
-        'GIF')
-            echo "GIF detected, may be animated, not processing just copying over to $DESTINATION_FOLDER"
+        'GIF'|'JSON')
+            echo "Recognized file type as copy only - not processing just copying over to $DESTINATION_FOLDER"
             mv "$file" "$DESTINATION_FOLDER"
         ;;
         *)
