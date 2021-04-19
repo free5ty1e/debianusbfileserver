@@ -15,15 +15,21 @@ mkdir -pv "$TARGET_FOLDER"
 case $(file -b "$1") in
   'JPEG '*)
     echo "JPEG file $1 detected, proceeding with processing (optimize then shrink for best file size)..."
-    imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
-    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
-    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
-		if test -f "$TARGET_FOLDER/$FILE_BASENAME"; then
-		    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$FILE_BASENAME exists.  Removing source file and temp file."
-		    rm "$1"
-		    rm "$TEMP_OPTIMIZED_FILENAME"
+    if imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
+	    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
+	    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
 		fi
+	else
+		echo "Input file must have already been optimized, just shrinking $1 instead..."
+	    if imageshrinktohd.sh "$1" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
+	    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
+		fi		
 	fi
+	if test -f "$TARGET_FOLDER/$FILE_BASENAME"; then
+	    echo "Image processing appears to have succeeded and target file $TARGET_FOLDER/$FILE_BASENAME exists.  Removing source file and temp file."
+	    rm "$1"
+	    rm "$TEMP_OPTIMIZED_FILENAME"
+	fi	
     ;;
   *)
     echo "$1 is not a JPEG file, skipping the processing and going straight to shrinking..."
