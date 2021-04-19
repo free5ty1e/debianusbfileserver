@@ -15,7 +15,7 @@ mkdir -pv "$TARGET_FOLDER"
 case $(file -b "$1") in
   'JPEG '*)
     echo "JPEG file $1 detected, proceeding with processing (optimize then shrink for best file size)..."
-    if imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME"
+    if imageoptimizejpeg.sh "$1" "$TEMP_OPTIMIZED_FILENAME" ; then 
 	    if imageshrinktohd.sh "$TEMP_OPTIMIZED_FILENAME" "$TEMP_OPTIMIZED_STAGE2_FILENAME" ; then 
 	    	mv "$TEMP_OPTIMIZED_STAGE2_FILENAME" "$TARGET_FOLDER/$FILE_BASENAME"
 		fi
