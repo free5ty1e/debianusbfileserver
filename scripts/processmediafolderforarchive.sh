@@ -71,7 +71,7 @@ then
 fi
 
 echo "First processing the files directly in $1"
-for file in "$1"/*; do
+for file in "$1"/* | grep -vF '/._' | grep -vF '/.DS_Store'; do
     processMediaFile "$file" "$2"
 done
 
@@ -82,7 +82,7 @@ find . -mindepth 1 -maxdepth 2 -type d | while read folder; do
     pushd "$folder"
     FOLDER_BASENAME="${PWD##*/}"
     echo "Processing subfolder $folder with FOLDER_BASENAME $FOLDER_BASENAME"
-    find . -type f | while read file; do
+    find . -type f | grep -vF '/._' | grep -vF '/.DS_Store' | while read file; do
         processMediaFile "$file" "$2/$FOLDER_BASENAME"
     done
     popd
