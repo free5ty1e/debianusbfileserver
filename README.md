@@ -393,7 +393,7 @@ Need to compile tool `untrunc` as well as a "reference" MP4 file recorded by the
 
 Then, you can use the included script `videofixmoovatom.sh` as such:
 ```
-videofixmoovatom.sh "damaged.mp4" "known_good_reference.mp4" "output_fixed.mp4"
+videofixmoovatom.sh "damaged.mp4" "known_good_reference.mp4"
 ```
 
 
