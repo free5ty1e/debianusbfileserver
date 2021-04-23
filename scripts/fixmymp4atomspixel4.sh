@@ -9,4 +9,4 @@ else
 fi 
 echo "BASEFOLDER is $BASEFOLDER"
 
-fixmp4atomsinfolder.sh "$BASEFOLDERSyncthing/GooglePixel4aPhotos/Camera" "$BASEFOLDER/SyncthingProcessed/Reference/OnePlus6Mp4/spotrefvid.mp4"
+fixmp4atomsinfolder.sh "$BASEFOLDER/Syncthing/GooglePixel4aPhotos/Camera" "$BASEFOLDER/SyncthingProcessed/Reference/OnePlus6Mp4/spotrefvid.mp4"
