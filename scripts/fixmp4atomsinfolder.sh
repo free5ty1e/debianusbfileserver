@@ -28,10 +28,10 @@ fi
 
 echo "Processing the *.mp4 files directly in $1"
 for file in "$1"/*.mp4; do
-    videofixmoovatom "$file" "$2"
+    videofixmoovatom.sh "$file" "$2"
 done
 
 echo "Processing the *.MP4 files directly in $1"
 for file in "$1"/*.MP4; do
-    videofixmoovatom "$file" "$2"
+    videofixmoovatom.sh "$file" "$2"
 done
