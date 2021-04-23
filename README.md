@@ -375,6 +375,12 @@ If you access the SyncThing folders at all from a Mac / OSX, you will get all so
 (?d)._*
 ```
 
+###### Repairing damaged MP4 files with missing `moov atom`s:
+
+
+Links:
+1. https://itectec.com/superuser/how-to-open-and-repair-an-m4v-or-mp4-video-file/
+
 ##### Using the `screen` utility to kick off and come back to long-running jobs over SSH
 Screen will ensure the batch command keeps on running even if your SSH session is terminated.
 
