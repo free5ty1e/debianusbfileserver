@@ -376,10 +376,31 @@ If you access the SyncThing folders at all from a Mac / OSX, you will get all so
 ```
 
 ###### Repairing damaged MP4 files with missing `moov atom`s:
+Need to compile tool `untrunc` as well as a "reference" MP4 file recorded by the same device / camera app with the same settings to pull a good `moov atom` from:
+```
+ git clone https://github.com/ponchio/untrunc.git
+ pushd untrunc
+ wget https://github.com/libav/libav/archive/v12.3.zip -O libav-12.3.zip
+ unzip libav-12.3.zip
+ pushd libav-12.3
+ ./configure
+ make
+ popd
+ g++ -o untrunc -I./libav-12.3 file.cpp main.cpp track.cpp atom.cpp codec_*.cpp codecstats.cpp codec.cpp mp4.cpp log.cpp -L./libav-12.3/libavformat -lavformat -L./libav-12.3/libavcodec -lavcodec -L./libav-12.3/libavresample -lavresample -L./libav-12.3/libavutil -lavutil -lpthread -lz
+ sudo cp untrunc /usr/local/bin/
+ popd
+```
+
+Then, you can use the included script `videofixmoovatom.sh` as such:
+```
+videofixmoovatom.sh "damaged.mp4" "known_good_reference.mp4" "output_fixed.mp4"
+```
+
 
 
 Links:
 1. https://itectec.com/superuser/how-to-open-and-repair-an-m4v-or-mp4-video-file/
+2. https://github.com/ponchio/untrunc
 
 ##### Using the `screen` utility to kick off and come back to long-running jobs over SSH
 Screen will ensure the batch command keeps on running even if your SSH session is terminated.
