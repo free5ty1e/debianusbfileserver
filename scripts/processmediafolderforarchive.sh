@@ -71,7 +71,8 @@ then
 fi
 
 echo "First processing the files directly in $1"
-for file in "$1"/* | grep -vF '/._' | grep -vF '/.DS_Store'; do
+# for file in "$1"/* | grep -vF '/._' | grep -vF '/.DS_Store'; do
+find . -type f -maxdepth 1 | grep -vF '/._' | grep -vF '/.DS_Store' | while read file; do
     processMediaFile "$file" "$2"
 done
 
