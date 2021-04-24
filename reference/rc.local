@@ -12,9 +12,16 @@
 #
 # By default this script does nothing.
 
-#Clear out the existing USB symlinks (my drive labels all start with P or M) :
-rm -v /media/P*
-rm -v /media/M*
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+
+#Clear out the existing USB symlinks (my drive labels all start with P or M, and the || /bin/true suffix allows these commands to fail gracefully and continue) :
+rm -v /media/P* || /bin/true
+rm -v /media/M* || /bin/true
 
 #cycle through each /dev/sd? usb drive device and tell each to rerun connect scripts in sequence with delays
 sequentialUsbDriveStartup.sh
