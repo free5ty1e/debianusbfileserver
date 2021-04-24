@@ -11,4 +11,4 @@ if [ -z "$*" ] ; then
 fi
 
 WHICHDRIVE="$1"
-sudo badblocks -v $WHICHDRIVE > /tmp/bad-blocks.txt 
+sudo badblocks -v -s $WHICHDRIVE > /tmp/bad-blocks.txt 
