@@ -34,8 +34,9 @@ function processMediaFile {
             videoprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
         'GIF'|'JSON')
-            echo "Recognized file type as copy only - not processing just copying over to $DESTINATION_FOLDER"
-            mv "$file" "$DESTINATION_FOLDER"
+            echo "Recognized file type as copy only - not processing just copying over to $DESTINATION_FOLDER in an appropriate year folder"
+            YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$file")
+            mv "$file" "$DESTINATION_FOLDER/$YEAR_FROM_FILENAME"
         ;;
         *)
             echo "Unknown file type with ext $extcaps, skipping!"
