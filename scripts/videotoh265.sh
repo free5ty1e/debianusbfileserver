@@ -35,7 +35,7 @@ SCALE_PARAMETER="scale=$LARGE_SIDE_MAX_PIXELS:$LARGE_SIDE_MAX_PIXELS:force_origi
 echo "Original SCALE_PARAMETER = $SCALE_PARAMETER"
 echo "Attempting to create a clever scale parameter that will only downscale, not upscale, with the same effect as above where the largest side will be downscaled to the given LARGE_SIDE_MAX_PIXELS parameter: $LARGE_SIDE_MAX_PIXELS"
 
-SCALE_PARAMETER="scale=min($LARGE_SIDE_MAX_PIXELS,max(iw,ih)):min($LARGE_SIDE_MAX_PIXELS,max(iw,ih)):force_original_aspect_ratio=decrease"
+SCALE_PARAMETER="scale=min($LARGE_SIDE_MAX_PIXELS\,max(iw\,ih)):min($LARGE_SIDE_MAX_PIXELS\,max(iw\,ih)):force_original_aspect_ratio=decrease"
 echo "Clever downlscale-only SCALE_PARAMETER = $SCALE_PARAMETER"
 
 if [ -z "$5" ] ; then
