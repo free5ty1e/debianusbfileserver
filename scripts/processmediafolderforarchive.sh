@@ -30,7 +30,7 @@ function processMediaFile {
         'JPG'|'JPEG'|'PNG')
             imageprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
-        'MP4'|'MKV'|'MOV'|'WEBP'|'AVI'|'MPG'|'MPEG')
+        'MP4'|'MKV'|'MOV'|'WEBP'|'AVI'|'MPG'|'MPEG'|'M4V'|'3GP'|'WMV')
             videoprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
         'GIF'|'JSON')
