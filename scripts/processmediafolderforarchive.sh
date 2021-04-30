@@ -30,6 +30,15 @@ function processMediaFile {
         'JPG'|'JPEG'|'PNG')
             imageprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
+        'BMP')
+            echo "Convertible to JPEG image format found, converting to JPG then optimizing / shrinking and moving to $DESTINATION_FOLDER in an appropriate year folder"
+            convert -quality 100 "$file" "$file.jpg"
+            if test -f "$file.jpg"; then
+                echo "Initial image conversion to JPG appears to have succeeded and target file $file.jpg exists.  Removing original source file $file ."
+                rm "$file"
+            fi
+            imageprocessforarchive.sh "$file.jpg" "$DESTINATION_FOLDER"
+        ;;
         'MP4'|'MKV'|'MOV'|'WEBP'|'AVI'|'MPG'|'MPEG'|'M4V'|'3GP'|'WMV')
             videoprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
