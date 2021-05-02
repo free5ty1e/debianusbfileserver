@@ -45,6 +45,7 @@ function processMediaFile {
         'GIF'|'JSON')
             echo "Recognized file type as copy only - not processing just copying over to $DESTINATION_FOLDER in an appropriate year folder"
             YEAR_FROM_FILENAME=$(yearfromfiletimestamp.sh "$file")
+            mkdir -pv "$DESTINATION_FOLDER/$YEAR_FROM_FILENAME"
             mv "$file" "$DESTINATION_FOLDER/$YEAR_FROM_FILENAME"
         ;;
         *)
