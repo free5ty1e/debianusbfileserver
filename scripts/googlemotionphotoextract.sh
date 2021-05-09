@@ -34,9 +34,27 @@ do
   # truncate a copy of input file to make .jpg file.
   if [[ $offset ]]
   then
-    dd "if=$srcfile" "of=${basefile}.mp4" bs=$((offset-4)) skip=1
-    cp -ip "$srcfile" "${basefile}.jpg" || exit 1
-    truncate -s $((offset-4)) "${basefile}.jpg"
+
+  	echo "Extracting .mp4 videos from $srcfile..."
+    perl -0777 -ne 's/^.*(....ftypmp4.*)$/$1/s && print' "$srcfile" >"${srcfile%.jpg}.mp4";
+
+  	echo "Removing .mp4 videos from $srcfile, leaving the single .jpg image..."
+    perl -0777 -pi -e 's/^(.*?)....ftypmp4.*$/$1/s' "$srcfile";
+
+    echo "Checking if we are left with a .jpg at all or was it just an .mp4, if so remove the 0-byte .jpg..."
+    if [ -s "$srcfile" ] 
+	then
+		echo "$srcfile has some data.  We have a .jpg, probably, leaving it alone!"
+	else
+		echo "$srcfile is empty, deleting empty file..."
+		rm -v "$srcfile"
+	fi
+ 
+ #Below method doesn't seem to work on my Vagrant Ubuntu Buster:
+    # dd "if=$srcfile" "of=${basefile}.mp4" bs=$((offset-4)) skip=1
+    # cp -ip "$srcfile" "${basefile}.jpg" || exit 1
+    # truncate -s $((offset-4)) "${basefile}.jpg"
+
   else
     echo "extract-mvimg: can't find ftypmp4 in $srcfile; skipping..." 2>&1
   fi
