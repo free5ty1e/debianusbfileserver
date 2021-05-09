@@ -83,6 +83,7 @@ fi
 
 echo "First processing the files directly in $1"
 for file in "$1"/* ; do
+    echo "Processing file $file directly in $1"
 # find "$1" -type f -maxdepth 1 | grep -vF '/._' | grep -vF '/.DS_Store' | while read file; do
     processMediaFile "$file" "$2"
 done
