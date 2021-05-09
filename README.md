@@ -282,6 +282,7 @@ The main features I want to keep from GPhotos are:
 6. Ensure that the image and video processing... uh, process... doesn't affect the original file creation date, so that photos and videos will still show up in the proper order on their correct dates when they were taken -- not when they were compressed (this may not be possible, so at least the filename still has a timestamp included somewhere)
 7. OK, so when photos are dumped into the sync folder this may need to be somewhere temporary / incoming / not on a redundant part of a backup drive yet.  Then, the processing script notices new files in there (or checks every so often and notices), and shrinks / recompresses / transcodes the files to another folder named after the current year (2021) on a redundant part of a backup drive.  This way the incoming files won't be duplicated before they are processed.
 8. Then perhaps before I clear photos / videos on my phone, first I check the sync status to make sure they all sync'd to the incoming folder, then I check the "incoming" folder to make sure it's empty, then I safely can delete the photos on my phone - knowing they are now safely on a redundant drive (perhaps I should also initiate the redundant sync before considering them "safe")
+9. Google Motion Photos should also be supported; these poorly-named `MVIMG_*.jpg` files are not actually jpeg images, but contain an `mp4` video.  CPhotos should extract this `mp4` video and then compress it to h265 and remove the source `MVIMG_*.jpg` files once confirmed complete.
   
 Install Syncthing following their website instructions: https://syncthing.net/downloads/#debian--ubuntu-packages, then here is a handy link with further instructions to install the Syncthing systemd service so it autostarts upon boot:
 https://docs.syncthing.net/users/autostart.html#linux 
@@ -368,6 +369,7 @@ Links:
 10. https://www.linux.com/topic/desktop/systemd-services-monitoring-files-and-directories/
 11. https://gist.github.com/fcangialosi/45701b95f7436049a6390fecf3c9b8a1
 12. https://bartsimons.me/sync-folders-and-files-on-linux-with-rsync-and-inotify/
+13. https://github.com/cliveontoast/GoMoPho
 
 If you access the SyncThing folders at all from a Mac / OSX, you will get all sorts of "locally changed files" if you don't ignore the following pattern for each sync folder: 
 ```
