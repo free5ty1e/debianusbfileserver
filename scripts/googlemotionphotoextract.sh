@@ -27,11 +27,14 @@ do
   # Strip trailing text. Example output: 2983617
   offset=${offset%:*}
 
+  echo "basefile=$basefile"
+  echo "offset=$offset"
+
   # If $offset isn't an empty string, create .mp4 file and
   # truncate a copy of input file to make .jpg file.
   if [[ $offset ]]
   then
-    dd status=none "if=$srcfile" "of=${basefile}.mp4" bs=$((offset-4)) skip=1
+    dd "if=$srcfile" "of=${basefile}.mp4" bs=$((offset-4)) skip=1
     cp -ip "$srcfile" "${basefile}.jpg" || exit 1
     truncate -s $((offset-4)) "${basefile}.jpg"
   else
