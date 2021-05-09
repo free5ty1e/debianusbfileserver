@@ -284,6 +284,12 @@ The main features I want to keep from GPhotos are:
 8. Then perhaps before I clear photos / videos on my phone, first I check the sync status to make sure they all sync'd to the incoming folder, then I check the "incoming" folder to make sure it's empty, then I safely can delete the photos on my phone - knowing they are now safely on a redundant drive (perhaps I should also initiate the redundant sync before considering them "safe")
 9. Google Motion Photos should also be supported; these poorly-named `MVIMG_*.jpg` files are not actually jpeg images, but contain an `mp4` video.  CPhotos should extract this `mp4` video and then compress it to h265 and remove the source `MVIMG_*.jpg` files once confirmed complete.
   
+  
+To process a single Google Motion Photo file, you can manually execute the following command to extract the `.mp4` and `.jpg` potentially contained inside.  Most times, I find there is only an `.mp4` - this is from my Pixel and Pixel 3's Google Motion Photos taken back in 2019.
+```
+googlemotionphotoextract.sh MVIMG_xxxxx_yyyyy.jpg
+```
+
 Install Syncthing following their website instructions: https://syncthing.net/downloads/#debian--ubuntu-packages, then here is a handy link with further instructions to install the Syncthing systemd service so it autostarts upon boot:
 https://docs.syncthing.net/users/autostart.html#linux 
 The Github location of the systemd files is here: https://github.com/syncthing/syncthing/tree/main/etc/linux-systemd
