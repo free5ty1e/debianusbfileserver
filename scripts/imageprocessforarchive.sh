@@ -14,7 +14,7 @@ mkdir -pv "$TARGET_FOLDER"
 
 if [[ $FILE_BASENAME == MVIMG_* ]]; then
 	echo "Google Motion Photo file detected!  Extracting .mp4 and potentially a .jpg..."
-	googlemotionphotoextract.sh "$1"
+	# googlemotionphotoextract.sh "$1"
 else
 	case $(file -b "$1") in
 	  'JPEG '*)

@@ -21,5 +21,5 @@ then
 	echo "$srcfile has some data.  We have a .jpg, probably, leaving it alone!"
 else
 	echo "$srcfile is empty, deleting empty file..."
-	rm -v "$srcfile"
+	#rm -v "$srcfile"
 fi
