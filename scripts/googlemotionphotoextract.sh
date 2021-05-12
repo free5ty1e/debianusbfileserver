@@ -15,11 +15,11 @@ perl -0777 -ne 's/^.*(....ftypmp4.*)$/$1/s && print' "$srcfile" >"${srcfile%.jpg
 echo "Removing .mp4 videos from $srcfile, leaving the single .jpg image..."
 perl -0777 -pi -e 's/^(.*?)....ftypmp4.*$/$1/s' "$srcfile";
 
-echo "Checking if we are left with a .jpg at all or was it just an .mp4, if so remove the 0-byte .jpg..."
-if [ -s "$srcfile" ] 
-then
-	echo "$srcfile has some data.  We have a .jpg, probably, leaving it alone!"
-else
-	echo "$srcfile is empty, deleting empty file..."
-	# rm -v "$srcfile"
-fi
+# echo "Checking if we are left with a .jpg at all or was it just an .mp4, if so remove the 0-byte .jpg..."
+# if [ -s "$srcfile" ] 
+# then
+# 	echo "$srcfile has some data.  We have a .jpg, probably, leaving it alone!"
+# else
+# 	echo "$srcfile is empty, deleting empty file..."
+# 	# rm -v "$srcfile"
+# fi

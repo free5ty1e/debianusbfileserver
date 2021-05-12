@@ -27,8 +27,9 @@ if [[ $FILE_BASENAME == MVIMG_* ]]; then
 
 	echo "Looking for extracted .MP4 $targetfname"
 	if [[ -f "$targetfname" ]]; then
-    	echo "$targetfname exists, moving extracted .mp4 over to $TARGET_FOLDER and deleting source file..."
-    	mv -v "$targetfname" "$TARGET_FOLDER"
+    	echo "$targetfname exists, processing extracted .mp4 then moving over to $TARGET_FOLDER and deleting source file..."
+    	videoprocessforarchive "$targetfname" "EX_h265_$targetfname"
+    	mv -v "EX_h265_$targetfname" "$TARGET_FOLDER"
     	rm -v "$1"
 	fi
 
