@@ -479,6 +479,7 @@ Choose `OpenMAX OMX` as the Hardware acceleration on the Transcoding tab of the 
 The following checkbox states should be applied for the hardware acceleration options:
 Enable hardware decoding for:
 
+```
 [ ] H264
 
 [ ] MPEG2
@@ -494,7 +495,7 @@ Enable hardware decoding for:
 [x] Enable hardware encoding
 
 [x] Allow encoding in HEVC format
-
+```
 
 Change the amount of memory allocated to the GPU. The GPU can't handle accelerated decoding and encoding simultaneously.
 
