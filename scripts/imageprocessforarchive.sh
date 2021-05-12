@@ -36,7 +36,9 @@ if [[ $FILE_BASENAME == MVIMG_* ]]; then
 	if [ -s "$FILE_BASENAME" ] 
 	then
 		echo "$FILE_BASENAME has some data.  We have a .jpg, probably, leaving it alone!"
-		mv -v "$FILE_BASENAME" "$TARGET_FOLDER"
+		echo "Actually, we need to run this jpg through the optimizer / shrinker now, renaming start of file to not match MVIMG_ for normal processing..."
+		mv -v "$FILE_BASENAME" "EX_$FILE_BASENAME"
+		imageprocessforarchive.sh "EX_$FILE_BASENAME" "$2"
 	else
 		echo "$FILE_BASENAME is empty, deleting empty file..."
 		rm -v "$FILE_BASENAME"
