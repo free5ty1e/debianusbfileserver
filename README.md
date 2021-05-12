@@ -476,6 +476,27 @@ If you are using a Raspberry Pi 4, you might need to run `sudo rpi-update` for k
 
 Choose `OpenMAX OMX` as the Hardware acceleration on the Transcoding tab of the Server Dashboard.
 
+The following checkbox states should be applied for the hardware acceleration options:
+Enable hardware decoding for:
+
+```
+[ ] H264
+
+[ ] MPEG2
+
+[x] MPEG4
+
+[x] VC1
+
+[x] Enable 10-Bit hardware decoding for HEVC
+
+[x] Enable 10-Bit hardware decoding for VP9
+
+[x] Enable hardware encoding
+
+[ ] Allow encoding in HEVC format
+```
+
 Change the amount of memory allocated to the GPU. The GPU can't handle accelerated decoding and encoding simultaneously.
 
 ```
