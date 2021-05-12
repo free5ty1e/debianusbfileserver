@@ -348,6 +348,26 @@ This is the script to process a folder:
 processmediafolderforarchive.sh sourceFolder targetFolder
 ```
 
+...I also wanted to ensure that all the transcoding / temp work was being done in a RAMdisk, as my Raspberry Pi 4 has 8GB of RAM that I do not fully use.  I dedicated 1.5GB to a RAMdrive.  I also uninstalled the swapfile first, and created the ramdisk folder:
+```
+sudo dphys-swapfile swapoff && sudo dphys-swapfile uninstall && sudo update-rc.d dphys-swapfile remove && sudo systemctl disable dphys-swapfile
+sudo mkdir /ramdisk
+```
+
+I edited the `/etc/fstab` file to enable the RAMdisk every bootup:
+```
+sudo nano /etc/fstab
+```
+...to contain the following entry for the RAMdisk:
+```
+transcode /ramdisk tmpfs size=1500M,noatime,nodev,nosuid,noexec,nodiratime 0 0
+```
+
+...After a restart, the ramdisk will be available.  
+
+The plan is to have the processing occur while the current folder is the ramdisk.  The current folder during execution is where the transcoding temp file is created.  We also want to utilize this temp space to process Google Motion Photos as they simply do not like being processed on a remote drive, so we will copy these to the ramdisk and then extract the `.mp4` and `.jpg` if available, then move them to the final destination and remove the source once we confirm the extracted target(s) exist. 
+
+
 ...and, if you'd like to just have this GPhotos-esque service (I like to call mine "CPhotos") always running as a systemd service, then I've worked out an example of exactly how to do that.  My example uses my customized `processmymediafoldersforarchive.sh` script, which runs through a list of specific syncs and target archival folders for my fileserver, and can be found as `reference/cphotos.service`.
 If you'd like to install this service, customize the `cphotos.service` file and then:
 ```
