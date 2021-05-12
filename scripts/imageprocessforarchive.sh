@@ -13,8 +13,35 @@ echo "Year extracted from filename via script: $YEAR_FROM_FILENAME, creating loc
 mkdir -pv "$TARGET_FOLDER"
 
 if [[ $FILE_BASENAME == MVIMG_* ]]; then
-	echo "Google Motion Photo file detected!  Extracting .mp4 and potentially a .jpg..."
-	# googlemotionphotoextract.sh "$1"
+	echo "Google Motion Photo file detected!  Extracting .mp4 and potentially a .jpg, first copying to the current folder..."
+	cp -vf "$1" .
+	ls -lha
+	googlemotionphotoextract.sh "$FILE_BASENAME"
+
+	echo "Finished extracting media from Google Motion Photo, now moving to target location..."
+	
+	file="$1"
+	filename=$(basename "$file")
+	fname="${filename%.*}"
+	targetfname="$fname.mp4"
+
+	echo "Looking for extracted .MP4 $targetfname"
+	if [[ -f "$targetfname" ]]; then
+    	echo "$targetfname exists, moving extracted .mp4 over to $TARGET_FOLDER and deleting source file..."
+    	mv -v "$targetfname" "$TARGET_FOLDER"
+    	rm -v "$1"
+	fi
+
+	echo "Looking for valid leftover .JPG"
+	if [ -s "$FILE_BASENAME" ] 
+	then
+		echo "$FILE_BASENAME has some data.  We have a .jpg, probably, leaving it alone!"
+		mv -v "$FILE_BASENAME" "$TARGET_FOLDER"
+	else
+		echo "$FILE_BASENAME is empty, deleting empty file..."
+		rm -v "$FILE_BASENAME"
+	fi	
+
 else
 	case $(file -b "$1") in
 	  'JPEG '*)
