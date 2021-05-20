@@ -3,4 +3,5 @@
 while [ 1 ]
 do
    camgridframe.sh
+   sleep 1
 done
