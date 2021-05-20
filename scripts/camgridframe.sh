@@ -11,4 +11,4 @@ montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.jpg /ramd
 
 #fbi -T 1 -fitwidth -blend 500 /ramdisk/camgrid.jpg
 sudo killall fim
-/usr/bin/fim --vt=1 --quiet --autowidth /ramdisk/camgrid.jpg &
+/usr/bin/fim --vt =1 --device =/dev/fb0 --quiet --autowidth /ramdisk/camgrid.jpg &
