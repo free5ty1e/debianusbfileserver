@@ -2,5 +2,5 @@
 
 while [ 1 ]
 do
-   ./camgridframe.sh
+   camgridframe.sh
 done
