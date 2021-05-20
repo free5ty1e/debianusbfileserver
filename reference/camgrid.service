@@ -1,0 +1,14 @@
+[Unit]
+Description=CamGrid Frame Generator
+
+[Service]
+Type=simple
+ExecStart=/home/pi/camgridframe.sh
+Restart=always
+RestartSec=1
+StandardOutput=null
+StandardError=file:/var/log/camgriderror.log
+SyslogIdentifier=camgrid
+
+[Install]
+WantedBy=multi-user.target
