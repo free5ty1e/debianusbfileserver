@@ -1,4 +1,3 @@
-
 #!/bin/bash
 ### BEGIN INIT INFO
 # Provides: omxplayer
@@ -9,6 +8,8 @@
 # Short-Description: Displays camera feeds for monitoring
 # Description:
 ### END INIT INFO
+
+#From https://community.spiceworks.com/how_to/123787-raspberry-pi-powered-surveillance-camera-monitoring-display
 
 # Camera Feeds & Positions
 top_left="screen -dmS top_left sh -c 'omxplayer --win \"0 21 640 501\" rtsp://sphene:mp3sheet@192.168.100.139/live -b --live '";
