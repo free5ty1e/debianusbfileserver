@@ -7,4 +7,4 @@
 
 # /usr/bin/fim --autowindow /ramdisk/camgrid.jpg
 
-xloadimage display 0.0 fullscreen foreground /ramdisk/camgrid.jpg &
+xloadimage -display :0 -fullscreen /ramdisk/camgrid.jpg &
