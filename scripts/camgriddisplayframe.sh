@@ -8,5 +8,5 @@
 # /usr/bin/fim --autowindow /ramdisk/camgrid.jpg
 
 # sudo killall xloadimage
-killall xloadimage
+killall xloadimage || true
 xloadimage -display :0 -fullscreen /ramdisk/camgrid.jpg &
