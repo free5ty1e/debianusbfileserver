@@ -3,7 +3,7 @@ Description=CamGrid Frame Generator
 
 [Service]
 Type=simple
-ExecStart=/home/pi/camgridloop.sh
+ExecStart=/usr/local/bin/camgridloop.sh
 Restart=always
 RestartSec=1
 StandardOutput=null
