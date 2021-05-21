@@ -10,4 +10,6 @@ montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.jpg /ramd
 # montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.bmp /ramdisk/rupee.bmp /ramdisk/camgrid.bmp
 
 #fbi -T 1 -fitwidth -blend 500 /ramdisk/camgrid.jpg
-/usr/bin/fim --vt =1 --device =/dev/fb0 --quiet --autowidth /ramdisk/camgrid.jpg &
+
+#Below kinda works without xwindow installed, over sdl, but only a couple times in a row...
+# /usr/bin/fim --vt =1 --device =/dev/fb0 --quiet --autowidth /ramdisk/camgrid.jpg &
