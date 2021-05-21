@@ -9,4 +9,4 @@
 
 # sudo killall xloadimage
 killall xloadimage || true
-xloadimage -display :0.0 -fullscreen /ramdisk/camgrid.jpg &
+xloadimage -display :0 -fullscreen /ramdisk/camgrid.jpg &
