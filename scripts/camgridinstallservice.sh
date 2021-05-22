@@ -1,7 +1,9 @@
 #!/bin/bash
 
-echo "Installing camgrid.service and reloading systemctl daemon..."
-sudo service camgrid stop
+echo "Installing / enabling camgrid.service and reloading systemctl daemon..."
+# sudo service camgrid stop
+sudo systemctl --user stop camgrid
 sudo cp -vf debianusbfileserver/reference/camgrid.service /etc/systemd/user/
-sudo systemctl --user daemon-reload
-sudo systemctl --user enable camgrid
+systemctl --user daemon-reload
+systemctl --user enable camgrid
+camgridservicestart.sh
