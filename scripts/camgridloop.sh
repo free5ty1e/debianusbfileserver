@@ -8,13 +8,16 @@ echo "User is `id -nu`, should be pi for this to work..."
 screensaverdisable.sh
 camgridstopframecaptures.sh
 camgridstartframecaptures.sh
+sleep 10
+camgridgenerateframe.sh
+camgridsetdesktopbackground.sh
 while [ 1 ]
 # for i in {0..10}
 do
 	# echo "Generating frame $i of 10..."
 	# camgridframe.sh
 	camgridgenerateframe.sh
-	camgriddisplayframe.sh
+	# camgriddisplayframe.sh
    	sleep 5
    # sudo killall fim
 done
