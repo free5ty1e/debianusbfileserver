@@ -4,8 +4,9 @@ Description=CamGrid Frame Generator
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/camgridloop.sh
+ExecStart=/usr/local/bin/camgridstopframecaptures.sh
 Restart=always
-RestartSec=1
+RestartSec=5
 User=pi
 Group=pi
 StandardOutput=null
