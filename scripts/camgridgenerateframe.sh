@@ -10,5 +10,5 @@ CAPTURE_RESOLUTION="640x480"
 # ffmpeg -y -loglevel fatal -stimeout $RTSP_TIMEOUT -rtsp_transport tcp -i "rtsp://rupee:mp3sheet@192.168.100.142/live" -frames:v 2 -r 1 -s $CAPTURE_RESOLUTION /ramdisk/rupee.jpg
 # ffmpeg -y -loglevel fatal -rtsp_transport tcp -i "rtsp://rupee:mp3sheet@192.168.100.142/live" -frames:v 2 -r 1 -s 640x480 /ramdisk/rupee.bmp
 
-montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.jpg /ramdisk/rupee.jpg /ramdisk/camgrid.jpg
+sudo montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.jpg /ramdisk/rupee.jpg /ramdisk/camgrid.jpg
 # montage -label %f -background '#336699' -geometry +4+4 /ramdisk/sphene.bmp /ramdisk/rupee.bmp /ramdisk/camgrid.bmp
