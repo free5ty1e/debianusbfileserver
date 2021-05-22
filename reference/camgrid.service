@@ -14,4 +14,4 @@ StandardError=file:/var/log/camgriderror.log
 SyslogIdentifier=camgrid
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical-session.target
