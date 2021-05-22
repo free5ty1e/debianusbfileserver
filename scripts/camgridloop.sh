@@ -16,8 +16,8 @@ while [ 1 ]
 do
 	# echo "Generating frame $i of 10..."
 	# camgridframe.sh
+	sleep 5
 	camgridgenerateframe.sh
 	# camgriddisplayframe.sh
-   	sleep 5
    # sudo killall fim
 done
