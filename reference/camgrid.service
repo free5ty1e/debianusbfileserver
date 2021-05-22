@@ -7,10 +7,7 @@ ExecStart=/usr/local/bin/camgridloop.sh
 ExecStop=/usr/local/bin/camgridstopframecaptures.sh
 Restart=always
 RestartSec=5
-User=pi
-Group=pi
 StandardOutput=null
-StandardError=file:/var/log/camgriderror.log
 SyslogIdentifier=camgrid
 
 [Install]
