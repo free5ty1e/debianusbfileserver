@@ -40,7 +40,7 @@ echo "Clever downlscale-only SCALE_PARAMETER = $SCALE_PARAMETER"
 
 if [ -z "$5" ] ; then
     echo "Fifth parameter omitted, using default of 1-pass encoding"
-    ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -c:a aac -b:a 128k -vf "$SCALE_PARAMETER" "$2"
+    ffmpeg -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -c:a aac -b:a 128k -max_muxing_queue_size 1024 -vf "$SCALE_PARAMETER" "$2"
 else
     echo "Fifth parameter provided (is $5), using 2-pass encoding"
     ffmpeg -y -i "$1" -vcodec libx265 -crf "$VIDEO_COMPRESSION_RATE_FACTOR" -preset veryslow -x265-params pass=1:vbv-maxrate=1000:vbv-bufsize=2000 -an -vf "$SCALE_PARAMETER" -f null /dev/null && \
