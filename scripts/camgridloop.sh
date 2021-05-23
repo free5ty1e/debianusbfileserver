@@ -18,6 +18,7 @@ do
 	# camgridframe.sh
 	sleep 5
 	camgridgenerateframe.sh
+	screensaverdisable.sh
 	# camgriddisplayframe.sh
    # sudo killall fim
 done
