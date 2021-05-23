@@ -9,7 +9,7 @@ camgridstopframecaptures.sh
 camgridstartframecaptures.sh
 sleep 10
 camgridgenerateframe.sh
-camgridsetdesktopbackground.sh
+camgridsetdesktopbackground.sh /ramdisk/camgrid.jpg
 screensaverdisable.sh
 while [ 1 ]
 # for i in {0..10}
