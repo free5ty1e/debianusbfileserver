@@ -5,12 +5,12 @@ echo "User is `id -nu`, should be pi for this to work..."
 #    echo "Not pi user, exiting.."
 #    exit 1
 # fi
-screensaverdisable.sh
 camgridstopframecaptures.sh
 camgridstartframecaptures.sh
 sleep 10
 camgridgenerateframe.sh
 camgridsetdesktopbackground.sh
+screensaverdisable.sh
 while [ 1 ]
 # for i in {0..10}
 do
