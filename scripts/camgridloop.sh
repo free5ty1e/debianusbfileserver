@@ -1,6 +1,5 @@
 #!/bin/bash
-
-SECONDS_BETWEEN_DISPLAY_FRAMES=5
+. $HOME/.camgrid/camgrid.conf
 
 echo "User is `id -nu`, should be pi for this to work..."
 # if [[ `id -nu` != "pi" ]];then

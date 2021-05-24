@@ -1,4 +1,5 @@
 #!/bin/bash
+. $HOME/.camgrid/camgrid.conf
 
 #fbi -T 1 -fitwidth -blend 500 /ramdisk/camgrid.jpg
 
