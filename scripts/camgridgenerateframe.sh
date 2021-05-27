@@ -14,8 +14,8 @@ CAM_FILE_PARAMETER_LIST=()
 for i in "${!RTSP_STREAM_URLS[@]}"; do 
 	STREAM_URL=${RTSP_STREAM_URLS[$i]}
 	STREAM_TITLE=${RTSP_STREAM_TITLES[$i]}
-	echo "======----->>>Adding cam capture file $CAPTURE_LOCATION/$STREAM_TITLE.jpg to list of cams to add to camgrid..."
-	CAM_FILE_PARAMETER_LIST+=("$CAPTURE_LOCATION/$STREAM_TITLE.jpg")
+	echo "======----->>>Adding cam capture file $CAPTURE_LOCATION/$STREAM_TITLE.$CAPTURE_FORMAT to list of cams to add to camgrid..."
+	CAM_FILE_PARAMETER_LIST+=("$CAPTURE_LOCATION/$STREAM_TITLE.$CAPTURE_FORMAT")
 done
 echo "Constructing camgrid with cam files from array: ${CAM_FILE_PARAMETER_LIST[@]}"
 sudo montage -label %f -background "$CAMGRID_BACKGROUND" -geometry "$CAMGRID_GEOMETRY" ${CAM_FILE_PARAMETER_LIST[@]} "$1"
