@@ -8,7 +8,7 @@ echo "User is `id -nu`, should be pi for this to work..."
 # fi
 CAMGRIDFILEA="/ramdisk/camgrid_a.$CAPTURE_FORMAT"
 CAMGRIDFILEB="/ramdisk/camgrid_b.$CAPTURE_FORMAT"
-WHICHCAMGRID="$CAMGRIDFILEA"
+WHICHCAMGRID=a
 echo "Camgrid filenames are $CAMGRIDFILEA and $CAMGRIDFILEB"
 
 camgridstopframecaptures.sh
@@ -44,17 +44,17 @@ while read -r directory events filename; do
 		STREAM_TITLE=${RTSP_STREAM_TITLES[$i]}
 		if [ "$filename" == "$STREAM_TITLE.$CAPTURE_FORMAT" ]; then
 			echo "$filename change detected, WHICHCAMGRID is currently $WHICHCAMGRID"
-			if [ WHICHCAMGRID == "$CAMGRIDFILEA" ]; then
+			if [ WHICHCAMGRID == a ]; then
 				echo "WHICHCAMGRID is currently set A, toggling to B..."
 				camgridgenerateframe.sh "$CAMGRIDFILEB"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEB"
-				WHICHCAMGRID="$CAMGRIDFILEB"
+				WHICHCAMGRID=b
 			else
 				echo "WHICHCAMGRID is currently set B, toggling to A..."
 				camgridgenerateframe.sh "$CAMGRIDFILEA"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEA"
 				screensaverdisable.sh
-				WHICHCAMGRID="$CAMGRIDFILEA"
+				WHICHCAMGRID=a
 			fi
   		fi
 	done
