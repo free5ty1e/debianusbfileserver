@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install -y --no-install-recommends xserver-xorg-core xserver-xorg xfonts-base xinit xfce4 desktop-base lightdm xloadimage fbi fim imagemagick ffmpeg vlc omxplayer xfce4-goodies
+sudo apt install -y --no-install-recommends xserver-xorg-core xserver-xorg xfonts-base xinit xfce4 desktop-base lightdm xloadimage fbi fim imagemagick ffmpeg vlc omxplayer xfce4-goodies inotify-tools
 
 echo "Installing log2ram from https://github.com/azlux/log2ram - see instructions there if this fails..."
 echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list
