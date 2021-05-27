@@ -13,7 +13,7 @@ echo "Camgrid filenames are $CAMGRIDFILEA and $CAMGRIDFILEB"
 camgridgenerateframe.sh "$CAMGRIDFILEA"
 camgridsetdesktopbackground.sh "$CAMGRIDFILEA"
 screensaverdisable.sh
-WHICHCAMGRID=a
+export WHICHCAMGRID=a
 
 ##OLD LOOP:
 # while [ 1 ]
@@ -44,13 +44,13 @@ while read -r directory events filename; do
 				echo "WHICHCAMGRID is currently set A, toggling to B..."
 				camgridgenerateframe.sh "$CAMGRIDFILEB"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEB"
-				WHICHCAMGRID=b
+				export WHICHCAMGRID=b
 			else
 				echo "WHICHCAMGRID is currently set B, toggling to A..."
 				camgridgenerateframe.sh "$CAMGRIDFILEA"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEA"
 				screensaverdisable.sh
-				WHICHCAMGRID=a
+				export WHICHCAMGRID=a
 			fi
   		fi
 	done
