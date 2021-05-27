@@ -40,7 +40,7 @@ while read -r directory events filename; do
 		STREAM_TITLE=${RTSP_STREAM_TITLES[$i]}
 		if [ "$filename" == "$STREAM_TITLE.$CAPTURE_FORMAT" ]; then
 			echo "$filename change detected, WHICHCAMGRID is currently $WHICHCAMGRID"
-			if [ WHICHCAMGRID == "a" ]; then
+			if [ "$WHICHCAMGRID" == "a" ]; then
 				echo "WHICHCAMGRID is currently set A, toggling to B..."
 				camgridgenerateframe.sh "$CAMGRIDFILEB"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEB"
