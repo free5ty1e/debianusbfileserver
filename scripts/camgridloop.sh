@@ -38,16 +38,19 @@ screensaverdisable.sh
 
 
 ##NEW LOOP:
-inotifywait --quiet --event close_write,moved_to,create --monitor /ramdisk |
+inotifywait --event close_write,moved_to,create --monitor /ramdisk |
 while read -r directory events filename; do
 	for i in "${!RTSP_STREAM_TITLES[@]}"; do 
 		STREAM_TITLE=${RTSP_STREAM_TITLES[$i]}
 		if [ "$filename" == "$STREAM_TITLE.$CAPTURE_FORMAT" ]; then
+			echo "$filename change detected, WHICHCAMGRID is currently $WHICHCAMGRID"
 			if [ WHICHCAMGRID == "$CAMGRIDFILEA" ]; then
+				echo "WHICHCAMGRID is currently set A, toggling to B..."
 				camgridgenerateframe.sh "$CAMGRIDFILEB"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEB"
 				WHICHCAMGRID="$CAMGRIDFILEB"
 			else
+				echo "WHICHCAMGRID is currently set B, toggling to A..."
 				camgridgenerateframe.sh "$CAMGRIDFILEA"
 				camgridsetdesktopbackground.sh "$CAMGRIDFILEA"
 				screensaverdisable.sh
