@@ -1,3 +1,3 @@
 #!/bin/bash
 export DISPLAY=:0 && scrot
-ls -lha ~
+ls -lha ~/*_scrot.*
