@@ -27,7 +27,7 @@ function processMediaFile {
     echo "Processing $file with filename $filename, fname $fname, and ext $extcaps"
 
     case $extcaps in
-        'JPG'|'JPEG'|'PNG')
+        'JPG'|'JPEG'|'PNG'|'WEBP')
             imageprocessforarchive.sh "$file" "$DESTINATION_FOLDER"
         ;;
         'BMP')
