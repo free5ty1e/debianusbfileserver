@@ -10,4 +10,4 @@ if [[ ! $(whoami) =~ "root" ]]; then
 fi
 
 mkdir -vp /media/primegames
-mount -t cifs -o user=pi //192.168.100.104/sharedusb/PrimeGamesBee /media/primegames
+mount -t cifs -o user=pi //192.168.100.110/sharedusb/PrimeGamesBee /media/primegames
