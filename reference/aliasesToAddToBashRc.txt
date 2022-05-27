@@ -1,0 +1,6 @@
+aliasesToAddToBashRc.txt
+
+ alias rsynccp='rsync --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms'  
+
+ alias rsyncmv='rsync --remove-source-files --recursive --times --modify-window=2 --progress --verbose --itemize-changes --stats --human-readable --chmod=Du+rwx,go-rwx,Fu+rw,go-rw --no-perms'
+
