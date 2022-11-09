@@ -4,4 +4,4 @@ echo "Customize a copy of this script to sync your own plex fileserver drive nam
 
 echo "Syncing Plex media drive, excluding Plex database"
 
-syncdrive.sh /media/Media8TbAyye /media/PrimeDataPool/FileSrvMedia nodryrun plexdata
+syncremotedrive.sh /media/Media8TbAyye /media/PrimeDataPool/FileSrvMedia nodryrun plexdata
