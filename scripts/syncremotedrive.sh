@@ -80,7 +80,7 @@ mv -vf "${SYNCLOC1}/rsync.log" "${SYNCLOC1}/rsync.log.old"
 echo "Syncing ${SYNCLOC1}/ with ${SYNCLOC2}/"
 
 echo "DELETIONS WILL NOT BE PROPOGATED, THIS IS ON PURPOSE TO PREVENT DATA CORRUPTION FROM PROPOGATING"
-rsync --archive --verbose --stats --progress --executability --fuzzy --one-file-system --no-whole-file --sparse --modify-window=2 --numeric-ids --inplace --human-readable --exclude-from="${EXCLUDEFILE}" --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
+rsync --archive -vvv --stats --progress --executability --fuzzy --one-file-system --no-whole-file --sparse --modify-window=2 --numeric-ids --inplace --human-readable --exclude-from="${EXCLUDEFILE}" --log-file="${SYNCLOC1}/rsync.log" "${SYNCLOC1}/" "${SYNCLOC2}/"
 
 echo "Exclude file contents were:"
 cat "${EXCLUDEFILE}"
