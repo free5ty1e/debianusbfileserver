@@ -12,4 +12,4 @@ echo "Syncing Plex media drive and Plex database"
 # popd
 # syncdrive.sh /media/Media8TbAyye /media/Media8TbBeee nodryrun 'plexdata'
 
-syncdrive.sh /media/Media8TbAyye/plexdata /media/Media8TbBeee/plexdata nodryrun
+syncdrive.sh /media/PiMassive14TbAyy/plexdata /media/PiMassive14TbBee/plexdata nodryrun

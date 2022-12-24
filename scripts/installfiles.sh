@@ -35,5 +35,8 @@ sudo chmod +x /usr/local/bin/*
 # rm ~/.vice
 # mkdir ~/.vice
 # cp -vr .vice/* ~/.vice/
+echo "Cleaning up old scripts..."
+sudo rm /usr/local/bin/syncmyplexdrive.sh
+sudo rm /usr/local/bin/syncmydrives.sh
 
 popd
