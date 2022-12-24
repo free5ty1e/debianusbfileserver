@@ -8,7 +8,6 @@ sudo apt-get -y install git && pushd ~ && rm -rf debianusbfileserver && git clon
 
 ## Options
 
-
 ### Automount USB Drives By Volume Name At Startup
 The installer will add auto symlinks by volume name in `/media/$VOLUME_NAME` when USB drives are connected, and the symlinks will be cleared upon disconnection.
 This is handled by the `/etc/usbmount/mount.d/02_create_label_symlink` and `/etc/usbmount/umount.d/01_remove_label_symlink` scripts.
@@ -23,6 +22,21 @@ If you (like me!) are also using this USB fileserver as a Plex media server, and
 
 See the example `reference/rc.local` file to see what this might look like.
 
+### Preparing USB Drive
+For a fresh drive, I like to go through the following steps to set up for usage on my USB fileserver.
+NOTE: When I type `/dev/sda` this might be `sdb` or `sdc` or `sdd` etc depending on which USB drive you want to manipulate.  Please be sure to identify and work with the correct drive!
+1) Run a `sudo drivesmartstats.sh /dev/sda` and ensure the drive isn't obviously failing
+1a) Optional: Run a `sudo drivetestbadblocksrwdestructive.sh /dev/sda` and allow at least one full cycle to pass completely before using the drive (if this fails, return the drive!!)
+2) Run `sudo fdisk /dev/sda` - `m` for help.  
+2a) Create new GPT partition table (`g`)
+2b) Create new full-size partition (`n` then enter for all defaults)
+2c) Review new partition changes (`p` then `v`)
+2d) Save changes and quit (`w`)
+3) Run `sudo mkfs.ext4 -L YourDriveLabelHere /dev/sda` to create the EXT4 filesystem
+4) I usually reboot the system at this point with Automount enabled and then I can see the drive mounted in `/media/YourDriveLabelHere`
+5) Now to make it writeable by the guests on your simple SMB share: run `pushd /media/YourDriveLabelHere && sudo chown pi:pi . && popd`
+6) Confirm you can write to the new drive as the Pi user: run `pushd /media/YourDriveLabelHere && touch hello && ls && rm hello && popd`
+7) Enjoy!
 
 ### Passwordless SSH Logins
 If you haven't already generated your SSH key, do it with the `ssh-keygen` command with all defaults.
