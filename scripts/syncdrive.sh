@@ -62,6 +62,30 @@ if [[ $5 ]] ; then
 	echo "$5" >> "${EXCLUDEFILE}"
 fi
 
+#If exclude parameter 6 passed, also append to exclude file:
+if [[ $6 ]] ; then
+	echo "Appending $6 to exclude file ${EXCLUDEFILE}"
+	echo "$6" >> "${EXCLUDEFILE}"
+fi
+
+#If exclude parameter 7 passed, also append to exclude file:
+if [[ $7 ]] ; then
+	echo "Appending $7 to exclude file ${EXCLUDEFILE}"
+	echo "$7" >> "${EXCLUDEFILE}"
+fi
+
+#If exclude parameter 8 passed, also append to exclude file:
+if [[ $8 ]] ; then
+	echo "Appending $8 to exclude file ${EXCLUDEFILE}"
+	echo "$8" >> "${EXCLUDEFILE}"
+fi
+
+#If exclude parameter 9 passed, also append to exclude file:
+if [[ $9 ]] ; then
+	echo "Appending $9 to exclude file ${EXCLUDEFILE}"
+	echo "$9" >> "${EXCLUDEFILE}"
+fi
+
 #echo "Enforcing no-sleep USB policies..."
 #sudo bash -c "for i in /sys/bus/usb/devices/*/power/autosuspend; do echo 2 > $i; done"
 #sudo bash -c "for foo in /sys/bus/usb/devices/*/power/level; do echo on > $foo; done"
