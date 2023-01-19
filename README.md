@@ -32,7 +32,7 @@ NOTE: When I type `/dev/sda` this might be `sdb` or `sdc` or `sdd` etc depending
 2b) Create new full-size partition (`n` then enter for all defaults)
 2c) Review new partition changes (`p` then `v`)
 2d) Save changes and quit (`w`)
-3) Run `sudo mkfs.ext4 -L YourDriveLabelHere /dev/sda` to create the EXT4 filesystem
+3) Run `sudo mkfs.ext4 -L YourDriveLabelHere /dev/sda1` to create the EXT4 filesystem
 4) I usually reboot the system at this point with Automount enabled and then I can see the drive mounted in `/media/YourDriveLabelHere`
 5) Now to make it writeable by the guests on your simple SMB share: run `pushd /media/YourDriveLabelHere && sudo chown pi:pi . && popd`
 6) Confirm you can write to the new drive as the Pi user: run `pushd /media/YourDriveLabelHere && touch hello && ls && rm hello && popd`
