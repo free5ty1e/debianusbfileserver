@@ -12,4 +12,5 @@ fi
 
 WHICHDRIVE="$1"
 
-sudo smartctl -d sat -A $WHICHDRIVE
+sudo smartctl -d sat -A --health --all $WHICHDRIVE
+
