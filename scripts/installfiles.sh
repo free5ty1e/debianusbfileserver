@@ -3,6 +3,7 @@
 echo "Installing scripts and other files into their proper locations...."
 pushd ~/debianusbfileserver
 sudo cp -v scripts/*.sh /usr/local/bin/
+sudo cp -v scripts/*.py /usr/local/bin/
 sudo cp -v bin/* /usr/local/bin/
 sudo chmod +x /usr/local/bin/*
 # sudo cp -vr etc /
