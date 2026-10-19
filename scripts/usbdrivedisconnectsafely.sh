@@ -31,9 +31,10 @@ fi
 
 echo "=== Preparing to safely eject $DEVICE (Force Mode: $FORCE_FLAG) ==="
 
-# Step 1: Automatically find and unmount all partitions associated with the device
-echo "Step 1: Unmounting all partitions for $DEVICE..."
-PARTITIONS=$(lsblk -ln -o NAME,MOUNTPOINT "$DEVICE" | grep -v '^$' | awk '{print "/dev/" $1}')
+# Step 1: Intelligently find all mounted partitions tied to the base device
+echo "Step 1: Unmounting active partitions for $DEVICE..."
+# lsblk filters for children/parts of the device that actually have a MOUNTPOINT
+PARTITIONS=$(lsblk -rno NAME,MOUNTPOINT "$DEVICE" | awk '$2 != "" {print "/dev/" $1}')
 
 if [ -z "$PARTITIONS" ]; then
     echo "No active mounts found for $DEVICE (already unmounted)."
@@ -41,7 +42,6 @@ else
     for part in $PARTITIONS; do
         echo "Unmounting $part..."
         if [ "$FORCE_FLAG" = true ]; then
-            # Lazy unmount detaches immediately even if files are busy
             sudo umount -l "$part"
         else
             sudo umount "$part"
