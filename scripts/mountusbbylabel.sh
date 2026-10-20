@@ -25,7 +25,8 @@ for dev in $(ls -1 /dev/disk/by-label/* | grep -v EFI) ; do
 		
 		# Apply umask=000 if the filesystem is exFAT
 		if [[ "$fstype" == "exfat" ]]; then
-			mount -o umask=000 "$dev" "/media/$label"
+			# mount -o umask=000 "$dev" "/media/$label"	#umask=000 is legacy for exfat-fuse
+			mount -o fmask=000,dmask=000 "$dev" "/media/$label"	#fmask,dmask=000 is for current exfat kernel driver
 		else
 			mount "$dev" "/media/$label"
 		fi
