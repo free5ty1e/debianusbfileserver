@@ -4,8 +4,10 @@ import sys
 import shutil
 
 def sync_sanitized(src_base, dst_base):
-    illegal = set("?*<>|\\\":")
+    # Explicitly defined illegal characters for exFAT/Windows filesystems
+    illegal = {'?', '*', '<', '>', '|', '\\', ':', '"'}
     count = 0
+    errors = 0
 
     if not os.path.exists(src_base):
         print(f"Error: Source path '{src_base}' does not exist.", file=sys.stderr)
@@ -22,25 +24,24 @@ def sync_sanitized(src_base, dst_base):
             if any(c in illegal for c in name):
                 src_path = os.path.join(root, name)
 
-                # Calculate relative path from the source root
-                rel_path = os.path.relpath(src_path, src_base)
+                try:
+                    rel_path = os.path.relpath(src_path, src_base)
+                    sanitized_rel_path = "".join("_" if c in illegal else c for c in rel_path)
+                    dst_path = os.path.join(dst_base, sanitized_rel_path)
 
-                # Build sanitized destination path (replacing illegal chars with underscores)
-                sanitized_rel_path = "".join("_" if c in illegal else c for c in rel_path)
-                dst_path = os.path.join(dst_base, sanitized_rel_path)
+                    dst_dir = os.path.dirname(dst_path)
+                    os.makedirs(dst_dir, exist_ok=True)
 
-                # Ensure target directory exists
-                dst_dir = os.path.dirname(dst_path)
-                os.makedirs(dst_dir, exist_ok=True)
+                    if os.path.isfile(src_path):
+                        if not os.path.exists(dst_path) or os.path.getmtime(src_path) > os.path.getmtime(dst_path):
+                            print(f"Copying: {rel_path} -> {sanitized_rel_path}")
+                            shutil.copy2(src_path, dst_path)
+                            count += 1
+                except Exception as e:
+                    print(f"Warning: Failed to process '{src_path}': {e}", file=sys.stderr)
+                    errors += 1
 
-                # Copy files if it's a file and update is needed
-                if os.path.isfile(src_path):
-                    if not os.path.exists(dst_path) or os.path.getmtime(src_path) > os.path.getmtime(dst_path):
-                        print(f"Copying: {rel_path} -> {sanitized_rel_path}")
-                        shutil.copy2(src_path, dst_path)
-                        count += 1
-
-    print(f"\nSuccessfully synced {count} special-character files locally.")
+    print(f"\nSuccessfully synced {count} special-character files locally (Errors: {errors}).")
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
@@ -48,3 +49,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     sync_sanitized(sys.argv[1], sys.argv[2])
+    
