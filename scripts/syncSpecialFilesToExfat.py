@@ -12,6 +12,8 @@ def sync_sanitized(src_base, dst_base):
     print("--exclude='*|*'")
     print("--exclude='*\"*'")
     print("--exclude='*\\*'")
+    print("--exclude='*\?*'")
+    print("--exclude='*:*'")
 
     illegal = {'?', '*', '<', '>', '|', '\\', ':', '"'}
     count = 0
