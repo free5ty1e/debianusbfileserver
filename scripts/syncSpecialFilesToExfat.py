@@ -5,6 +5,14 @@ import shutil
 
 def sync_sanitized(src_base, dst_base):
     # Explicitly defined illegal characters for exFAT/Windows filesystems
+
+    print("Add the following exclude entries to your rsync command to avoid special character issues copying to exFAT:")
+    print("--exclude='*<*'")
+    print("--exclude='*>*'")
+    print("--exclude='*|*'")
+    print("--exclude='*\"*'")
+    print("--exclude='*\\*'")
+
     illegal = {'?', '*', '<', '>', '|', '\\', ':', '"'}
     count = 0
     errors = 0
@@ -49,4 +57,3 @@ if __name__ == "__main__":
         sys.exit(1)
 
     sync_sanitized(sys.argv[1], sys.argv[2])
-    
