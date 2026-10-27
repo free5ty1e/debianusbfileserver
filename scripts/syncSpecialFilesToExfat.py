@@ -3,18 +3,27 @@ import os
 import sys
 import shutil
 
+def generate_exclude_file(filename="rsync_excludes.txt"):
+    """Generates the clean rsync excludes file for exFAT compatibility."""
+    excludes = [
+        "lost+found",
+        "*<*",
+        "*>*",
+        "*|*",
+        '*"*',
+        "*\\*",
+        "*\?*",
+        "*:*"
+    ]
+    try:
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write("\n".join(excludes) + "\n")
+        print(f"Successfully generated exclude file: {os.path.abspath(filename)}")
+    except Exception as e:
+        print(f"Warning: Failed to generate exclude file '{filename}': {e}", file=sys.stderr)
+
 def sync_sanitized(src_base, dst_base):
     # Explicitly defined illegal characters for exFAT/Windows filesystems
-
-    print("Add the following exclude entries to your rsync command to avoid special character issues copying to exFAT:")
-    print("--exclude='*<*'")
-    print("--exclude='*>*'")
-    print("--exclude='*|*'")
-    print("--exclude='*\\\"*'")
-    print("--exclude='*\\\\*'")
-    print("--exclude='*\?*'")
-    print("--exclude='*:*'")
-
     illegal = {'?', '*', '<', '>', '|', '\\', ':', '"'}
     count = 0
     errors = 0
@@ -54,8 +63,12 @@ def sync_sanitized(src_base, dst_base):
     print(f"\nSuccessfully synced {count} special-character files locally (Errors: {errors}).")
 
 if __name__ == "__main__":
+    # Automatically generate the exclude file on every script run
+    generate_exclude_file()
+
     if len(sys.argv) < 3:
-        print("Usage: python3 syncSpecialFilesToExfat.py <source_dir> <destination_dir>")
+        print("\nUsage: python3 syncSpecialFilesToExfat.py <source_dir> <destination_dir>")
         sys.exit(1)
 
     sync_sanitized(sys.argv[1], sys.argv[2])
+    
