@@ -1,0 +1,13 @@
+[Unit]
+Description=Rclone Google Drive One-Way Copy (No Deletion)
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# The copy command ensures NO local files are ever deleted.
+ExecStart=/home/pi/rclone_gdrive_sync.sh
+User=pi
+Group=pi
+RemainAfterExit=no
+SuccessExitStatus=0 143
