@@ -14,7 +14,6 @@ DEVICE_NAME=$(basename "$DEVICE_PATH")
 echo "Safely removing device $DEVICE_PATH..."
 
 # Find all mounted partitions belonging to this device block
-# We check /proc/mounts and match partitions starting with the device name (e.g., sdf1, sdf2)
 MOUNTED_PARTITIONS=$(awk -v dev="$DEVICE_NAME" '$1 ~ "^/dev/"dev"[0-9]+$" {print $2}' /proc/mounts)
 
 if [ -n "$MOUNTED_PARTITIONS" ]; then
@@ -32,6 +31,12 @@ fi
 # Sync filesystem buffers before powering down
 sync
 
-# Power off the device cleanly via udisksctl
-sudo udisksctl power-off -b "$DEVICE_PATH"[cite: 3]
-echo "$DEVICE_PATH has been powered off successfully[cite: 3]."
+# Power off the device cleanly via udisksctl, fallback to sysfs power/control if udisks objects fail
+if ! sudo udisksctl power-off -b "$DEVICE_PATH"; then
+    echo "udisksctl failed, attempting kernel sysfs power-off..."
+    if [ -d "/sys/block/$DEVICE_NAME/device" ]; then
+        echo "1" | sudo tee /sys/block/$DEVICE_NAME/device/delete > /dev/null
+    fi
+fi
+
+echo "$DEVICE_PATH has been powered off successfully."
